@@ -1,5 +1,6 @@
 <div align="center">
   <img src="./tida-logo.png" alt="FG-TIDA logo" width="180"/>
+  
   # FG-TIDA
   ### ITU-T Focus Group on Trust and Identity for Humans and Agentic AI
 
