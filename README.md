@@ -1,6 +1,5 @@
 <div align="center">
   <img src="./tida-logo.png" alt="FG-TIDA logo" width="180"/>
-
   # FG-TIDA
   ### ITU-T Focus Group on Trust and Identity for Humans and Agentic AI
 
@@ -12,7 +11,7 @@
 
 ## About
 
-Agentic AI systems now act as autonomous entities capable of reasoning, planning, and executing tasks across services, infrastructures, and organizational boundaries. This changes what "identity" means in digital systems — it's no longer limited to human users and static machine instances, but must also cover autonomous, dynamic, goal-oriented agents. And identity alone isn't enough: the real question is not just *what* an entity is, but *whether, and under what conditions, it should be trusted to act*.
+Agentic AI systems now act as autonomous entities capable of reasoning, planning, and executing tasks across services, infrastructures, and organizational boundaries. This changes what "identity" means in digital systems, it's no longer limited to human users and static machine instances, but must also cover autonomous, dynamic, goal-oriented agents. And identity alone isn't enough: the real question is not just *what* an entity is, but *whether, and under what conditions, it should be trusted to act*.
 
 **FG-TIDA** addresses trust management and interoperable digital identity infrastructure for both humans and agentic AI, supporting the development of secure, trustworthy digital ecosystems in which humans and agents can safely interact and collaborate.
 
