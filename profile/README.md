@@ -25,6 +25,16 @@ FG-TIDA operates under **ITU-T Study Group 17**.
 - 🌐 [TIDA Community](https://tida.community/) — news, updates, and supporter organizations
 - 🏛️ [Official ITU-T FG-TIDA page](https://www.itu.int/en/ITU-T/focusgroups/tida/Pages/default.aspx)
 
+## Meeting Minutes
+
+Agendas and minutes from all FG-TIDA meetings — including the virtual Interregnum preparation meetings and the in-person Paris meeting — are published in the [`meetings`](https://github.com/FG-TIDA/meetings) repository.
+
+## Join the Brainstorming: Proposing a Theme
+
+FG-TIDA's initial deliverables and Working Group structure are being shaped through an open, community-driven brainstorming phase. Anyone can propose a **theme** — an idea for a topic FG-TIDA should explore — no leadership commitment or GitHub experience required.
+
+👉 Head to the [`themes`](https://github.com/FG-TIDA/themes) repository and open a new **Issue** using the "Theme Proposal" template to get started. Full details on how the process works, from initial proposal through to a formal charter, are explained in that repository's README.
+
 ## Leadership
 
 **Co-Chairs**
@@ -40,7 +50,7 @@ FG-TIDA operates under **ITU-T Study Group 17**.
 ## Upcoming
 
 - **FG-TIDA Face-to-Face Kick-Off Meeting** — 1–4 December 2026, Paris, France
-- Interregnum preparatory e-meetings running through late 2026 — see the [meetings page](https://www.itu.int/en/ITU-T/focusgroups/tida/Pages/default.aspx) for dates and links
+- Interregnum preparatory e-meetings running through late 2026 — see the [meetings](https://github.com/FG-TIDA/meetings) repository for dates and links
 
 ---
 
