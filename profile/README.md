@@ -35,6 +35,28 @@ FG-TIDA's initial deliverables and Working Group structure are being shaped thro
 
 👉 Head to the [`themes`](https://github.com/FG-TIDA/themes) repository and open a new **Issue** using the "Theme Proposal" template to get started. Full details on how the process works, from initial proposal through to a formal charter, are explained in that repository's README.
 
+## Working Groups & specifications
+
+Specifications are developed in the open, one repository per document. Each
+specification publishes its own web page and downloadable PDF automatically.
+
+Repositories are named by working group: `wg1-…`, `wg2-…`, and so on. Filter by
+the working-group topic to see all documents from a given group.
+
+## Writing a specification
+
+TIDA specifications are authored from a shared template that produces a modern
+web page and a print-ready PDF from the same source, with support for diagrams
+and auto-generated API references.
+
+- **Template:** [`FG-TIDA/spec-template`](https://github.com/FG-TIDA/spec-template)
+- **How to start:** see the onboarding guide in the template repository
+  (`WG-ONBOARDING.md`) — in short, click **Use this template**, name your repo
+  `wg<N>-<short-name>`, enable GitHub Pages (Actions), and start writing.
+
+The template is built on the open-source
+[CUTEspecs](https://github.com/debora-com/CUTEspecs) project.
+
 ## Leadership
 
 **Co-Chairs**
