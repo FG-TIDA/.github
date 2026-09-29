@@ -73,7 +73,7 @@ The template is built on the open-source
 
 ## Upcoming
 
-- **FG-TIDA Face-to-Face Kick-Off Meeting** — 1–4 December 2026, Paris, France
+- **FG-TIDA Face-to-Face Kick-Off Meeting** — 30 Nov – 1 December 2026, Paris, France
 - Interregnum preparatory e-meetings running through late 2026 — see the [meetings](https://github.com/FG-TIDA/meetings) repository for dates and links
 
 ---
