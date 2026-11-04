@@ -125,7 +125,7 @@ code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500
 /* start node */
 .start { display: flex; flex-direction: column; gap: 12px; border-top: 4px solid var(--ink); padding-top: 12px; }
 .start h2 { font-size: 22px; font-weight: 600; }
-.fork { display: flex; gap: 10px; flex-wrap: wrap; }
+.fork { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
 .fork a { text-decoration: none; font-weight: 500; font-size: 14px; padding: 7px 14px; border-radius: 999px; border: 1.5px solid currentColor; background: var(--surface); }
 .fork a.a { color: var(--a); } .fork a.b { color: var(--b); }
 .fork a:hover { background: var(--bg); }
@@ -192,7 +192,6 @@ code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500
   .sarrow { transform: rotate(90deg); font-size: 26px; }
 }
 
-.sources { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; max-width: 80ch; }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
 </style>
 
@@ -502,8 +501,6 @@ code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500
       <div class="sbox"><div class="tags"><span class="tag"><i class="dot tr"></i>TIDA DataTracker</span></div><h3>The work item is accepted</h3><p>By a working group, or by the new one that Incubation formed.</p></div>
     </div>
   </section>
-
-  <p class="sources">Based on <code>CONTRIBUTING.md</code> and <code>WG-ONBOARDING.md</code> in <code>FG-TIDA/spec-template</code>, the working group landing pages, and the contribution workflow and document states of the TIDA DataTracker.</p>
 </div>
 </body>
 </html>
