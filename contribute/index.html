@@ -76,9 +76,6 @@ p { margin: 0; }
 a { color: var(--a); }
 code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500; }
 
-/* legend */
-.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: var(--muted); align-items: center; }
-.legend span { display: inline-flex; align-items: center; gap: 7px; }
 .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
 .dot.gh { background: var(--gh); } .dot.tr { background: var(--tr); } .dot.ml { background: var(--ml); }
 
@@ -126,9 +123,9 @@ code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500
 .defs dd { margin: 0; font-size: 13.5px; color: var(--muted); }
 
 /* start node */
-.start { align-self: center; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.start-node { border: 2px solid var(--ink); border-radius: 999px; padding: 10px 26px; font-weight: 600; background: var(--surface); }
-.fork { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.start { display: flex; flex-direction: column; gap: 12px; border-top: 4px solid var(--ink); padding-top: 12px; }
+.start h2 { font-size: 22px; font-weight: 600; }
+.fork { display: flex; gap: 10px; flex-wrap: wrap; }
 .fork a { text-decoration: none; font-weight: 500; font-size: 14px; padding: 7px 14px; border-radius: 999px; border: 1.5px solid currentColor; background: var(--surface); }
 .fork a.a { color: var(--a); } .fork a.b { color: var(--b); }
 .fork a:hover { background: var(--bg); }
@@ -302,19 +299,13 @@ code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500
     </dl>
   </section>
 
-  <div class="legend" aria-label="Legend">
-    <span><i class="dot gh"></i> GitHub</span>
-    <span><i class="dot tr"></i> TIDA DataTracker</span>
-    <span><i class="dot ml"></i> WG mailing list</span>
-    <span><span class="st">State</span> The lifecycle state a step happens in</span>
-  </div>
-
-  <div class="start">
-    <div class="start-node">I want to contribute to TIDA</div>
+  <section class="start" aria-labelledby="hh">
+    <h2 id="hh">How to contribute</h2>
     <div class="fork">
       <a class="a" href="#existing">The work item already exists</a>
       <a class="b" href="#new">I have a new work item</a>
     </div>
+  </section>
   </div>
 
   <div class="paths">
