@@ -132,8 +132,7 @@ code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500
 .fork a:focus-visible { outline: 3px solid currentColor; outline-offset: 2px; }
 
 /* two paths */
-.paths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start; }
-@media (max-width: 860px) { .paths { grid-template-columns: minmax(0, 1fr); } }
+.paths { display: flex; flex-direction: column; gap: 48px; }
 .path { --c: var(--a); --tint: var(--a-tint); display: flex; flex-direction: column; gap: 14px; min-width: 0; scroll-margin-top: 16px; }
 .path.b { --c: var(--b); --tint: var(--b-tint); }
 .path-head { border-top: 4px solid var(--c); padding-top: 12px; display: flex; flex-direction: column; gap: 6px; }
