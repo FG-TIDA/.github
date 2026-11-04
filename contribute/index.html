@@ -135,8 +135,8 @@ code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500
 .paths { display: flex; flex-direction: column; gap: 48px; }
 .path { --c: var(--a); --tint: var(--a-tint); display: flex; flex-direction: column; gap: 14px; min-width: 0; scroll-margin-top: 16px; }
 .path.b { --c: var(--b); --tint: var(--b-tint); }
-.path-head { border-top: 4px solid var(--c); padding-top: 12px; display: flex; flex-direction: column; gap: 6px; }
-.path-head h2 { font-size: 22px; font-weight: 600; color: var(--c); }
+.path-head { display: flex; flex-direction: column; gap: 6px; }
+.path-head h3 { font-size: 20px; font-weight: 600; color: var(--c); }
 .path-head p { color: var(--muted); font-size: 14px; }
 .path-head .states { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
 
@@ -303,15 +303,13 @@ code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500
       <a class="a" href="#existing">The work item already exists</a>
       <a class="b" href="#new">I have a new work item</a>
     </div>
-  </section>
-  </div>
 
   <div class="paths">
 
     <!-- PATH A -->
     <section class="path a" id="existing" aria-labelledby="ha">
       <div class="path-head">
-        <h2 id="ha">Contribute to an existing work item</h2>
+        <h3 id="ha">Contribute to an existing work item</h3>
         <p>The work item lives in its working group's GitHub organisation. You propose changes; the working group decides.</p>
         <div class="states">Applies while the work item is <span class="st">Draft</span> or <span class="st amber">Under review</span></div>
       </div>
@@ -389,7 +387,7 @@ code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500
     <!-- PATH B -->
     <section class="path b" id="new" aria-labelledby="hb">
       <div class="path-head">
-        <h2 id="hb">Submit a new work item</h2>
+        <h3 id="hb">Submit a new work item</h3>
         <p>You draft the work item from the template and submit it in the TIDA DataTracker. The TIDA DataTracker is the official record.</p>
         <div class="states">Takes a work item from <span class="st blue">Submitted</span> to <span class="st">Draft</span></div>
       </div>
@@ -470,6 +468,7 @@ code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500
     </section>
 
   </div>
+  </section>
 
   <section class="sync" aria-labelledby="hs">
     <h2 id="hs">GitHub and the TIDA DataTracker stay in sync</h2>
