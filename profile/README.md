@@ -49,22 +49,6 @@ Mature themes will graduate to become WGs.
 
 Improve an existing work item or submit a new one: [see how to contribute](https://fg-tida.github.io/.github/).
 
-## Writing a specification
-
-TIDA specifications are authored from a shared template that produces a modern
-web page and a print-ready PDF from the same source, with support for diagrams
-and auto-generated API references.
-
-- **Template:** [`FG-TIDA/spec-template`](https://github.com/FG-TIDA/spec-template)
-- **See it live:** [web page](https://fg-tida.github.io/spec-template/) ·
-  [PDF](https://fg-tida.github.io/spec-template/specification.pdf)
-- **How to start:** see the onboarding guide in the template repository
-  (`WG-ONBOARDING.md`) — in short, click **Use this template**, name your repo
-  `wg<N>-<short-name>`, enable GitHub Pages (Actions), and start writing.
-
-The template is built on the open-source
-[CUTEspecs](https://github.com/debora-com/CUTEspecs) project.
-
 ## Leadership
 
 **Co-Chairs**
