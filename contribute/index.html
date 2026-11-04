@@ -158,6 +158,7 @@ code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500
 .tag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px 2px 7px; color: var(--ink); background: var(--bg); }
 
 /* decision options */
+.qh { margin: 14px 0 0; font-size: 14.5px; font-weight: 600; }
 .opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin-top: 12px; }
 .opt { border: 1.5px solid var(--line); border-left: 4px solid var(--c); border-radius: 8px; padding: 10px 12px; background: var(--bg); min-width: 0; }
 .opt .if { font-size: 12.5px; color: var(--muted); }
@@ -385,26 +386,8 @@ code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500
         <div class="states">Takes a work item from <span class="st blue">Submitted</span> to <span class="st">Draft</span></div>
       </div>
       <ol class="steps">
-        <li class="step">
+                <li class="step">
           <div class="num">1</div>
-          <div class="card decide">
-            <h3>Where does it belong?</h3>
-            <div class="opts">
-              <div class="opt">
-                <div class="if">It fits an existing working group</div>
-                <h4>Send it to that working group</h4>
-                <p>Pick the group in the submission form (step 3).</p>
-              </div>
-              <div class="opt">
-                <div class="if">It needs a new working group</div>
-                <h4>Send it to Incubation</h4>
-                <p>Pick <strong>Incubation</strong> in the form.</p>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="step">
-          <div class="num">2</div>
           <div class="card">
             <div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span></div>
             <h3>Draft it from the work item template</h3>
@@ -412,16 +395,29 @@ code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500
           </div>
         </li>
         <li class="step">
-          <div class="num">3</div>
+          <div class="num">2</div>
           <div class="card">
             <div class="tags"><span class="tag"><i class="dot tr"></i>TIDA DataTracker</span><span class="st blue">Submitted</span></div>
             <h3>Submit it in the TIDA DataTracker</h3>
             <p>Sign in, open the contribution form and enter the title and abstract, the target (Incubation or a working group), and the document (PDF, DOCX, PPTX, TXT, Markdown or XML, up to 10&nbsp;MB). Include the link to your draft repository: it ties the TIDA DataTracker record to GitHub and switches on the synchronisation below.</p>
-            <p>The work item is <strong>Submitted</strong> straight away and goes to the group you chose.</p>
+            <h4 class="qh">Where does it belong?</h4>
+            <div class="opts">
+              <div class="opt">
+                <div class="if">It fits an existing working group</div>
+                <h4>Send it to that working group</h4>
+                <p>Pick the group in the submission form.</p>
+              </div>
+              <div class="opt">
+                <div class="if">It needs a new working group</div>
+                <h4>Send it to Incubation</h4>
+                <p>Pick <strong>Incubation</strong> in the form.</p>
+              </div>
+            </div>
+            <p style="margin-top:12px">The work item is <strong>Submitted</strong> straight away and goes to the group you chose.</p>
           </div>
         </li>
         <li class="step">
-          <div class="num">4</div>
+          <div class="num">3</div>
           <div class="card decide">
             <div class="tags"><span class="tag"><i class="dot tr"></i>TIDA DataTracker</span><span class="tag"><i class="dot ml"></i>Mailing list</span><span class="st blue">Submitted</span></div>
             <h3>The group decides</h3>
@@ -443,7 +439,7 @@ code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500
           </div>
         </li>
         <li class="step">
-          <div class="num">5</div>
+          <div class="num">4</div>
           <div class="card">
             <div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span><span class="tag"><i class="dot tr"></i>TIDA DataTracker</span><span class="st">Draft</span></div>
             <h3>The working group repository is created</h3>
