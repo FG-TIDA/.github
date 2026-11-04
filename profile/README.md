@@ -39,11 +39,11 @@ Mature themes will graduate to become WGs.
 
 ## Established Working Groups
 
-Specifications are developed in the open, one repository per document. Each
-specification publishes its own web page and downloadable PDF automatically.
-
-Repositories are named by working group: `wg1-…`, `wg2-…`, and so on. Filter by
-the working-group topic to see all documents from a given group.
+| Working Group | Link |
+|:--------------|:-----|
+| WG0 | [Access WG0](https://github.com/fg-tida-wg0) |
+| WG1 | [Access WG1](https://github.com/fg-tida-wg1) |
+| WG2 | [Access WG2](https://github.com/fg-tida-wg2) |
 
 ## Contributing to TIDA
 
