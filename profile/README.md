@@ -31,17 +31,23 @@ Agendas and minutes from all FG-TIDA meetings — including the virtual Interreg
 
 ## Join the Brainstorming: Proposing a Theme
 
-FG-TIDA's initial deliverables and Working Group structure are being shaped through an open, community-driven brainstorming phase. Anyone can propose a **theme** — an idea for a topic FG-TIDA should explore — no leadership commitment or GitHub experience required.
+FG-TIDA's initial deliverables and Working Group structure are being shaped through an open, community-driven brainstorming phase. Anyone can propose a **theme** that is an idea for a topic FG-TIDA should explore. No leadership commitment or GitHub experience required.
 
 👉 Head to the [`themes`](https://github.com/FG-TIDA/themes) repository and open a new **Issue** using the "Theme Proposal" template to get started. Full details on how the process works, from initial proposal through to a formal charter, are explained in that repository's README.
 
-## Working Groups & specifications
+Mature themes will graduate to become WGs.
+
+## Established Working Groups
 
 Specifications are developed in the open, one repository per document. Each
 specification publishes its own web page and downloadable PDF automatically.
 
 Repositories are named by working group: `wg1-…`, `wg2-…`, and so on. Filter by
 the working-group topic to see all documents from a given group.
+
+## Contributing to TIDA
+
+Improve an existing work item or submit a new one: [see how to contribute](https://fg-tida.github.io/.github/).
 
 ## Writing a specification
 
