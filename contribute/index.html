@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Contribute to TIDA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: the work item lifecycle is the spine at the top; below it one start node splits into two paths (existing work item / new work item) whose steps carry the lifecycle state they happen in; a sync band closes the page. */
+:root {
+  --bg: #F6F8FA;
+  --surface: #FFFFFF;
+  --ink: #13202C;
+  --muted: #536375;
+  --line: #CAD3DD;
+  --a: #1B58B8;
+  --b: #0B7A63;
+  --a-tint: #E8F0FC;
+  --b-tint: #E4F4EF;
+  --gh: #13202C;
+  --tr: #1B58B8;
+  --ml: #9A5B00;
+  /* lifecycle state colours follow the tracker markers: blue submitted, grey draft, amber under review, green approved/published, red withdrawn */
+  --st-blue: #1B58B8;  --st-blue-bg: #E8F0FC;
+  --st-grey: #4A5866;  --st-grey-bg: #ECEFF3;
+  --st-amber: #8A5200; --st-amber-bg: #FFF1D6;
+  --st-green: #0B6B4F; --st-green-bg: #E0F3EB;
+  --st-red: #A32626;   --st-red-bg: #FBE6E6;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0D141B; --surface: #151E27; --ink: #E5ECF3; --muted: #9AABBB; --line: #2B3846;
+    --a: #7DAEFF; --b: #4FC9A9; --a-tint: #16263D; --b-tint: #12302A;
+    --gh: #E5ECF3; --tr: #7DAEFF; --ml: #E6AD55;
+    --st-blue: #7DAEFF;  --st-blue-bg: #16263D;
+    --st-grey: #A9B6C3;  --st-grey-bg: #1F2A35;
+    --st-amber: #E6AD55; --st-amber-bg: #302410;
+    --st-green: #4FC9A9; --st-green-bg: #12302A;
+    --st-red: #FF8A8A;   --st-red-bg: #3A1717;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0D141B; --surface: #151E27; --ink: #E5ECF3; --muted: #9AABBB; --line: #2B3846;
+  --a: #7DAEFF; --b: #4FC9A9; --a-tint: #16263D; --b-tint: #12302A;
+  --gh: #E5ECF3; --tr: #7DAEFF; --ml: #E6AD55;
+  --st-blue: #7DAEFF;  --st-blue-bg: #16263D;
+  --st-grey: #A9B6C3;  --st-grey-bg: #1F2A35;
+  --st-amber: #E6AD55; --st-amber-bg: #302410;
+  --st-green: #4FC9A9; --st-green-bg: #12302A;
+  --st-red: #FF8A8A;   --st-red-bg: #3A1717;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+
+body { margin: 0; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 56px;
+}
+.wrap { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; line-height: 1.2; }
+h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 600; letter-spacing: -0.01em; }
+p { margin: 0; }
+.lead { color: var(--muted); max-width: 62ch; margin-top: 8px; font-size: 16px; }
+a { color: var(--a); }
+code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500; }
+
+/* legend */
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: var(--muted); align-items: center; }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.dot.gh { background: var(--gh); } .dot.tr { background: var(--tr); } .dot.ml { background: var(--ml); }
+
+/* lifecycle state chip: colour plus the state's name, never colour alone */
+.st { --sc: var(--st-grey); --sbg: var(--st-grey-bg); display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--sc); background: var(--sbg); border: 1.5px solid var(--sc); border-radius: 999px; padding: 1px 10px; white-space: nowrap; }
+.st.blue { --sc: var(--st-blue); --sbg: var(--st-blue-bg); }
+.st.amber { --sc: var(--st-amber); --sbg: var(--st-amber-bg); }
+.st.green { --sc: var(--st-green); --sbg: var(--st-green-bg); }
+.st.red { --sc: var(--st-red); --sbg: var(--st-red-bg); }
+
+/* lifecycle flow */
+.life { display: flex; flex-direction: column; gap: 12px; border-top: 4px solid var(--ink); padding-top: 12px; }
+.life h2 { font-size: 22px; font-weight: 600; }
+.life > p { color: var(--muted); font-size: 14px; max-width: 72ch; margin-top: -6px; }
+.life figure { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.flowbox { overflow-x: auto; border: 1.5px solid var(--line); border-radius: 10px; background: var(--surface); padding: 8px; }
+.flow { display: block; width: 100%; min-width: 960px; height: auto; }
+.life figcaption { font-size: 13px; color: var(--muted); max-width: 80ch; }
+.hint { display: none; font-size: 12.5px; color: var(--muted); }
+@media (max-width: 980px) { .hint { display: block; } }
+.node { stroke-width: 2; }
+.n-grey { fill: var(--st-grey-bg); stroke: var(--st-grey); }
+.n-blue { fill: var(--st-blue-bg); stroke: var(--st-blue); }
+.n-amber { fill: var(--st-amber-bg); stroke: var(--st-amber); }
+.n-green { fill: var(--st-green-bg); stroke: var(--st-green); }
+.n-red { fill: var(--st-red-bg); stroke: var(--st-red); }
+.n-dash { stroke-dasharray: 6 4; }
+.dec { fill: var(--surface); stroke: var(--st-blue); stroke-width: 2.5; }
+.n-act { stroke-width: 2; }
+.t-yn { font: 700 13px var(--font-body); fill: var(--ink); }
+.t-name { font: 600 14px var(--font-body); fill: var(--ink); }
+.t-name-s { font-size: 12.5px; }
+.t-sub { font: 500 11px var(--font-body); fill: var(--muted); }
+.t-open { font: 600 10.5px var(--font-body); fill: var(--ink); }
+.t-lab { font: 500 12px var(--font-body); fill: var(--ink); }
+.t-labm { font: 500 12px var(--font-body); fill: var(--muted); }
+.t-labr { font: 500 12px var(--font-body); fill: var(--st-red); }
+.edge { fill: none; stroke: var(--ink); stroke-width: 2.5; }
+.edge-m { fill: none; stroke: var(--muted); stroke-width: 2; }
+.edge-r { fill: none; stroke: var(--st-red); stroke-width: 2; stroke-dasharray: 5 4; }
+.ah { fill: var(--ink); } .ahm { fill: var(--muted); } .ahr { fill: var(--st-red); }
+.defs { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px 20px; margin: 4px 0 0; }
+.defs dt { margin: 0 0 4px; }
+.defs dd { margin: 0; font-size: 13.5px; color: var(--muted); }
+
+/* start node */
+.start { align-self: center; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.start-node { border: 2px solid var(--ink); border-radius: 999px; padding: 10px 26px; font-weight: 600; background: var(--surface); }
+.fork { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.fork a { text-decoration: none; font-weight: 500; font-size: 14px; padding: 7px 14px; border-radius: 999px; border: 1.5px solid currentColor; background: var(--surface); }
+.fork a.a { color: var(--a); } .fork a.b { color: var(--b); }
+.fork a:hover { background: var(--bg); }
+.fork a:focus-visible { outline: 3px solid currentColor; outline-offset: 2px; }
+
+/* two paths */
+.paths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start; }
+@media (max-width: 860px) { .paths { grid-template-columns: minmax(0, 1fr); } }
+.path { --c: var(--a); --tint: var(--a-tint); display: flex; flex-direction: column; gap: 14px; min-width: 0; scroll-margin-top: 16px; }
+.path.b { --c: var(--b); --tint: var(--b-tint); }
+.path-head { border-top: 4px solid var(--c); padding-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+.path-head h2 { font-size: 22px; font-weight: 600; color: var(--c); }
+.path-head p { color: var(--muted); font-size: 14px; }
+.path-head .states { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+
+.steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.step { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; position: relative; padding-bottom: 14px; }
+.step::before { content: ""; position: absolute; left: 16px; top: 34px; bottom: -2px; width: 2px; background: var(--line); }
+.step:last-child { padding-bottom: 0; }
+.step:last-child::before { display: none; }
+.step::after { content: ""; position: absolute; left: 11px; bottom: 2px; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid var(--line); }
+.step:last-child::after { display: none; }
+.num { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--c); color: var(--c); background: var(--surface); display: grid; place-items: center; font-family: var(--font-mono); font-weight: 500; font-size: 14px; z-index: 1; }
+.card { background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 14px 16px 16px; min-width: 0; margin-bottom: 14px; }
+.step:last-child .card { margin-bottom: 0; }
+.card.decide { border-color: var(--c); }
+.card h3 { font-size: 16px; font-weight: 600; }
+.card p { color: var(--muted); font-size: 14px; margin-top: 4px; }
+.card p strong, .card li strong { color: var(--ink); font-weight: 600; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; align-items: center; }
+.tag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px 2px 7px; color: var(--ink); background: var(--bg); }
+
+/* decision options */
+.opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin-top: 12px; }
+.opt { border: 1.5px solid var(--line); border-left: 4px solid var(--c); border-radius: 8px; padding: 10px 12px; background: var(--bg); min-width: 0; }
+.opt .if { font-size: 12.5px; color: var(--muted); }
+.opt h4 { margin: 2px 0 4px; font-size: 14.5px; font-weight: 600; }
+.opt p, .opt ol { font-size: 13.5px; color: var(--muted); margin-top: 0; }
+.opt ol { margin: 4px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 2px; }
+.outcomes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+@media (max-width: 480px) { .outcomes { grid-template-columns: minmax(0, 1fr); } }
+.out { border-radius: 8px; padding: 9px 12px; font-size: 13.5px; border: 1.5px solid var(--line); background: var(--bg); color: var(--muted); display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.out strong { color: var(--ink); font-size: 14px; }
+.end { border: 2px solid var(--c); border-radius: 10px; padding: 12px 16px; background: var(--tint); font-size: 14px; }
+.end strong { color: var(--ink); }
+.end a { font-weight: 500; }
+
+/* sync */
+.sync { display: flex; flex-direction: column; gap: 14px; border-top: 4px solid var(--ink); padding-top: 12px; }
+.sync h2 { font-size: 22px; font-weight: 600; }
+.sync > p { color: var(--muted); font-size: 14px; max-width: 72ch; margin-top: -6px; }
+.scols, .srow { display: grid; grid-template-columns: minmax(0, 1fr) 160px minmax(0, 1fr); gap: 12px; }
+.scols { font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.scols span:first-child { grid-column: 1; } .scols span:last-child { grid-column: 3; text-align: right; }
+.sbox { background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px; min-width: 0; }
+.sbox h3 { font-size: 15px; font-weight: 600; }
+.sbox p { color: var(--muted); font-size: 13.5px; margin-top: 4px; }
+.schan { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 2px; color: var(--muted); font-size: 12.5px; }
+.sarrow { display: inline-block; font-size: 30px; line-height: 1; color: var(--ink); }
+@media (max-width: 760px) {
+  .scols { display: none; }
+  .srow { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .schan { flex-direction: row; justify-content: center; gap: 12px; }
+  .sarrow { transform: rotate(90deg); font-size: 26px; }
+}
+
+.sources { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; max-width: 80ch; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>How to contribute to TIDA</h1>
+    <p class="lead">TIDA work is organised in work items. Every work item moves through the same lifecycle, and you can contribute at either end of it: improve a work item that exists, or submit a new one.</p>
+  </header>
+
+  <section class="life" aria-labelledby="hl">
+    <h2 id="hl">The life of a work item</h2>
+    <p>A work item enters the tracker as Submitted. The tracker is the official record and holds the state of every work item; the GitHub repository shows it.</p>
+    <figure>
+      <div class="flowbox">
+      <svg class="flow" viewBox="0 36 1052 456" role="img" aria-label="Work item lifecycle: a work item is Submitted to the tracker and sent either to Incubation or to a working group. Incubation answers 'accepted?': yes forms a new working group which adopts the work item, no rejects it. The working group answers 'adoption?': yes makes it a Draft, no rejects it. A Draft goes to Under review and then Published. Under review can return to Draft. Rejected is final. Any state can be withdrawn.">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker>
+          <marker id="ahm" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path class="ahm" d="M0,0 L10,5 L0,10 z"/></marker>
+          <marker id="ahr" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path class="ahr" d="M0,0 L10,5 L0,10 z"/></marker>
+        </defs>
+
+        <!-- Submitted is routed to Incubation or to a working group -->
+        <path class="edge" d="M124,210 H170 V104 H265" marker-end="url(#ah)"/>
+        <path class="edge" d="M124,210 H170 V316 H265" marker-end="url(#ah)"/>
+        <text class="t-lab" x="217" y="94" text-anchor="middle">to Incubation</text>
+        <text class="t-lab" x="217" y="306" text-anchor="middle">to a WG</text>
+
+        <!-- Incubation: accepted? -->
+        <path class="edge" d="M425,104 H470" marker-end="url(#ah)"/>
+        <text class="t-yn" x="447" y="94" text-anchor="middle">Y</text>
+        <path class="edge-m" d="M345,156 V186" marker-end="url(#ahm)"/>
+        <text class="t-yn" x="356" y="176">N</text>
+        <path class="edge" d="M586,104 H612 V282" marker-end="url(#ah)"/>
+        <text class="t-lab" x="622" y="196">adopts</text>
+
+        <!-- Working group: adoption? -->
+        <path class="edge" d="M425,316 H560" marker-end="url(#ah)"/>
+        <text class="t-yn" x="492" y="306" text-anchor="middle">Y</text>
+        <path class="edge-m" d="M345,264 V234" marker-end="url(#ahm)"/>
+        <text class="t-yn" x="356" y="254">N</text>
+
+        <!-- Draft to Published -->
+        <path class="edge" d="M664,316 H744" marker-end="url(#ah)"/>
+        <path class="edge" d="M848,316 H928" marker-end="url(#ah)"/>
+        <text class="t-lab" x="704" y="306" text-anchor="middle">review starts</text>
+        <text class="t-lab" x="888" y="306" text-anchor="middle">WG approves</text>
+
+        <!-- back to draft -->
+        <path class="edge-m" d="M796,350 V372 H612 V350" marker-end="url(#ahm)"/>
+        <text class="t-labm" x="704" y="366" text-anchor="middle">changes needed</text>
+
+        <!-- withdrawn from any state -->
+        <path class="edge-r" d="M50,244 V398"/>
+        <path class="edge-r" d="M582,350 V398"/>
+        <path class="edge-r" d="M826,350 V398"/>
+        <path class="edge-r" d="M1010,350 V398"/>
+        <path class="edge-r" d="M50,398 H1010"/>
+        <path class="edge-r" d="M796,398 V428" marker-end="url(#ahr)"/>
+        <text class="t-labr" x="64" y="390">any state can be withdrawn</text>
+
+        <rect class="node n-blue" x="20" y="176" width="104" height="68" rx="10"/>
+        <text class="t-name" x="72" y="202" text-anchor="middle">Submitted</text>
+        <text class="t-sub" x="72" y="219" text-anchor="middle">Tracker</text>
+        <polygon class="node dec" points="345,52 425,104 345,156 265,104"/>
+        <text class="t-name t-name-s" x="345" y="100" text-anchor="middle">Incubation:</text>
+        <text class="t-name t-name-s" x="345" y="118" text-anchor="middle">accepted?</text>
+        <polygon class="node dec" points="345,264 425,316 345,368 265,316"/>
+        <text class="t-name t-name-s" x="345" y="312" text-anchor="middle">WG:</text>
+        <text class="t-name t-name-s" x="345" y="330" text-anchor="middle">adoption?</text>
+        <rect class="node n-grey n-act" x="470" y="76" width="116" height="56" rx="3"/>
+        <text class="t-name t-name-s" x="528" y="100" text-anchor="middle">New WG formed</text>
+        <text class="t-sub" x="528" y="118" text-anchor="middle">charter template</text>
+        <rect class="node n-red" x="293" y="186" width="104" height="48" rx="10"/>
+        <text class="t-name" x="345" y="207" text-anchor="middle">Rejected</text>
+        <text class="t-sub" x="345" y="223" text-anchor="middle">final</text>
+        <rect class="node n-grey" x="560" y="282" width="104" height="68" rx="10"/>
+        <text class="t-name" x="612" y="308" text-anchor="middle">Draft</text>
+        <text class="t-sub" x="612" y="325" text-anchor="middle">GitHub</text>
+        <text class="t-open" x="612" y="341" text-anchor="middle">contribute here</text>
+        <rect class="node n-amber" x="744" y="282" width="104" height="68" rx="10"/>
+        <text class="t-name" x="796" y="308" text-anchor="middle">Under review</text>
+        <text class="t-sub" x="796" y="325" text-anchor="middle">GitHub</text>
+        <text class="t-open" x="796" y="341" text-anchor="middle">contribute here</text>
+        <rect class="node n-green" x="928" y="282" width="104" height="68" rx="10"/>
+        <text class="t-name" x="980" y="308" text-anchor="middle">Published</text>
+        <text class="t-sub" x="980" y="325" text-anchor="middle">GitHub + tracker</text>
+        <rect class="node n-red" x="744" y="428" width="104" height="48" rx="10"/>
+        <text class="t-name" x="796" y="450" text-anchor="middle">Withdrawn</text>
+        <text class="t-sub" x="796" y="466" text-anchor="middle">record is kept</text>
+      </svg>
+      </div>
+      <p class="hint">Scroll sideways to see the whole flow.</p>
+      <figcaption>Rounded boxes are states. Diamonds are decisions: the work item stays Submitted until Incubation or the working group answers Y or N, and the state changes either way. The square box is an action. Solid arrows are the normal path; dashed red arrows lead to Withdrawn. Contributions arrive as pull requests while a work item is in Draft or Under review.</figcaption>
+    </figure>
+    <dl class="defs">
+      <div><dt><span class="st blue">Submitted</span></dt><dd>Submitted to the tracker and sent either to Incubation or to a working group. It stays Submitted until that group decides.</dd></div>
+      <div><dt><span class="st red">Rejected</span></dt><dd>Declined by Incubation or by the working group.</dd></div>
+      <div><dt><span class="st">Draft</span></dt><dd>Adopted by a working group, or by the new working group Incubation formed. The repository exists and the group writes the work item.</dd></div>
+      <div><dt><span class="st amber">Under review</span></dt><dd>The working group reviews the draft. Changes still arrive as pull requests.</dd></div>
+      <div><dt><span class="st green">Published</span></dt><dd>The working group has approved the work item and the editors have published it. The work item is final.</dd></div>
+      <div><dt><span class="st red">Withdrawn</span></dt><dd>Possible from any state. The work item stays in the tracker record.</dd></div>
+    </dl>
+  </section>
+
+  <div class="legend" aria-label="Legend">
+    <span><i class="dot gh"></i> GitHub</span>
+    <span><i class="dot tr"></i> TIDA tracker</span>
+    <span><i class="dot ml"></i> WG mailing list</span>
+    <span><span class="st">State</span> The lifecycle state a step happens in</span>
+  </div>
+
+  <div class="start">
+    <div class="start-node">I want to contribute to TIDA</div>
+    <div class="fork">
+      <a class="a" href="#existing">The work item already exists</a>
+      <a class="b" href="#new">I have a new work item</a>
+    </div>
+  </div>
+
+  <div class="paths">
+
+    <!-- PATH A -->
+    <section class="path a" id="existing" aria-labelledby="ha">
+      <div class="path-head">
+        <h2 id="ha">Contribute to an existing work item</h2>
+        <p>The work item lives in its working group's GitHub organisation. You propose changes; the working group decides.</p>
+        <div class="states">Applies while the work item is <span class="st">Draft</span> or <span class="st amber">Under review</span></div>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <div class="num">1</div>
+          <div class="card">
+            <div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span></div>
+            <h3>Find the work item</h3>
+            <p>Open your working group's GitHub page, for example <code>github.com/fg-tida-wg2</code>. Its table of deliverables links each work item's published site, PDF and repository (<code>wg&lt;n&gt;-&lt;acronym&gt;-&lt;name&gt;</code>). The chairs and mailing list are listed there too.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="num">2</div>
+          <div class="card decide">
+            <h3>What do you want to do?</h3>
+            <div class="opts">
+              <div class="opt">
+                <div class="if">Change the text</div>
+                <h4>Open a pull request</h4>
+                <ol>
+                  <li>In the browser: open a file under <code>src/doc/</code>, click the pencil, choose <strong>Propose changes</strong>.</li>
+                  <li>Or with Git: branch, edit, push, then open a PR against <code>main</code>.</li>
+                </ol>
+                <p style="margin-top:6px"><strong>Never push to <code>main</code> directly.</strong></p>
+              </div>
+              <div class="opt">
+                <div class="if">Report a problem or ask a question</div>
+                <h4>Open an issue</h4>
+                <p>A clear title and a short description of what is wrong and where is enough to start.</p>
+              </div>
+              <div class="opt">
+                <div class="if">Discuss direction or larger questions</div>
+                <h4>Write to the mailing list</h4>
+                <p>Use the list linked on the WG page. Raise it with the group before drafting anything big.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="step">
+          <div class="num">3</div>
+          <div class="card">
+            <div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span></div>
+            <h3>The working group reviews</h3>
+            <p>Every pull request is reviewed by the working group before it is merged, so each change keeps a review and decision history.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="num">4</div>
+          <div class="card">
+            <div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span><span class="tag"><i class="dot tr"></i>Tracker</span></div>
+            <h3>Merged into <code>main</code></h3>
+            <p>Each push to <code>main</code> rebuilds the HTML site and PDF and publishes them to GitHub Pages. The same build is sent to the tracker, which always holds the latest working copy of the work item.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="num">5</div>
+          <div class="card">
+            <div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span><span class="tag"><i class="dot tr"></i>Tracker</span></div>
+            <h3>Release: tag <code>vX.Y</code> becomes revision X.Y</h3>
+            <p>When the editors tag a release, the PDF, source archive and a manifest go to the tracker, which records revision <strong>X.Y</strong> of the work item.</p>
+            <p>Merges between releases update the working copy only. They do not create a revision.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="num">&#9679;</div>
+          <div class="end">
+            <strong>Your contribution is input, not adopted text.</strong>
+            It becomes part of the work item only through the working group's review and the appropriate FG-TIDA process. Everything you do in the repository follows the ITU-T and FG-TIDA participation, conduct and IPR rules.
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- PATH B -->
+    <section class="path b" id="new" aria-labelledby="hb">
+      <div class="path-head">
+        <h2 id="hb">Submit a new work item</h2>
+        <p>You draft the work item from the template and submit it in the tracker. The tracker is the official record.</p>
+        <div class="states">Takes a work item from <span class="st blue">Submitted</span> to <span class="st">Draft</span></div>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <div class="num">1</div>
+          <div class="card decide">
+            <h3>Where does it belong?</h3>
+            <div class="opts">
+              <div class="opt">
+                <div class="if">It fits an existing working group</div>
+                <h4>Send it to that working group</h4>
+                <p>Pick the group in the submission form (step 3).</p>
+              </div>
+              <div class="opt">
+                <div class="if">It needs a new working group</div>
+                <h4>Send it to Incubation</h4>
+                <p>Pick <strong>Incubation</strong> in the form.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="step">
+          <div class="num">2</div>
+          <div class="card">
+            <div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span></div>
+            <h3>Draft it from the work item template</h3>
+            <p>On <code>FG-TIDA/spec-template</code> click <strong>Use this template</strong>, create the repository in your own account, and fill in the abstract, authors and chapters. Every push to <code>main</code> builds a site and a PDF you can review and share.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="num">3</div>
+          <div class="card">
+            <div class="tags"><span class="tag"><i class="dot tr"></i>Tracker</span><span class="st blue">Submitted</span></div>
+            <h3>Submit it in the tracker</h3>
+            <p>Sign in, open the contribution form and enter the title and abstract, the target (Incubation or a working group), and the document (PDF, DOCX, PPTX, TXT, Markdown or XML, up to 10&nbsp;MB). Include the link to your draft repository: it ties the tracker record to GitHub and switches on the synchronisation below.</p>
+            <p>The work item is <strong>Submitted</strong> straight away and goes to the group you chose.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="num">4</div>
+          <div class="card decide">
+            <div class="tags"><span class="tag"><i class="dot tr"></i>Tracker</span><span class="tag"><i class="dot ml"></i>Mailing list</span><span class="st blue">Submitted</span></div>
+            <h3>The group decides</h3>
+            <p>The work item stays Submitted until the group decides. Either way, its state changes.</p>
+            <div class="opts">
+              <div class="opt">
+                <div class="if">Sent to Incubation</div>
+                <h4>Incubation decides</h4>
+                <p><span class="st red">Rejected</span> if Incubation rejects it.</p>
+                <p style="margin-top:6px"><span class="st">Draft</span> if it accepts: a new working group is formed, chartered from <code>wg-charter-template</code> (<code>wg&lt;n&gt;-&lt;acronym&gt;-charter</code>), and the work item moves into it.</p>
+              </div>
+              <div class="opt">
+                <div class="if">Sent to a working group</div>
+                <h4>The working group decides</h4>
+                <p><span class="st red">Rejected</span> if the group rejects it.</p>
+                <p style="margin-top:6px"><span class="st">Draft</span> if the group adopts it.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="step">
+          <div class="num">5</div>
+          <div class="card">
+            <div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span><span class="tag"><i class="dot tr"></i>Tracker</span><span class="st">Draft</span></div>
+            <h3>The working group repository is created</h3>
+            <p>On acceptance the repository is created from the template inside the working group's organisation as <code>wg&lt;n&gt;-&lt;acronym&gt;-&lt;name&gt;</code>, with title and authors filled in from the tracker. The tracker's repository link is updated to it.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="num">&#9679;</div>
+          <div class="end">
+            <strong>It is now an existing work item.</strong>
+            From here, everyone contributes through <a href="#existing">the path for an existing work item</a>.
+          </div>
+        </li>
+      </ol>
+    </section>
+
+  </div>
+
+  <section class="sync" aria-labelledby="hs">
+    <h2 id="hs">GitHub and the tracker stay in sync</h2>
+    <p>Once a work item's tracker record is linked to its repository, the two stay in step without anyone copying files. Each row runs automatically, in the direction of the arrow.</p>
+    <div class="scols" aria-hidden="true"><span>GitHub</span><span>Tracker</span></div>
+
+    <div class="srow">
+      <div class="sbox"><div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span></div><h3>Pull request merged into <code>main</code></h3></div>
+      <div class="schan"><span>sends the new build</span><span class="sarrow" aria-label="to the tracker">&rarr;</span></div>
+      <div class="sbox"><div class="tags"><span class="tag"><i class="dot tr"></i>Tracker</span></div><h3>Working copy updated</h3><p>The PDF and manifest of the latest build replace the working copy. The merge is logged in the work item's history. The revision number stays the same.</p></div>
+    </div>
+
+    <div class="srow">
+      <div class="sbox"><div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span></div><h3>Release tag <code>vX.Y</code> pushed</h3></div>
+      <div class="schan"><span>sends PDF, source archive, manifest</span><span class="sarrow" aria-label="to the tracker">&rarr;</span></div>
+      <div class="sbox"><div class="tags"><span class="tag"><i class="dot tr"></i>Tracker</span></div><h3>Revision X.Y recorded</h3><p>A new numbered revision is stored. The tracker rejects a duplicate or out-of-order tag.</p></div>
+    </div>
+
+    <div class="srow">
+      <div class="sbox"><div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span></div><h3>Repository shows the state</h3><p>A badge and label in the repository show the work item's lifecycle state.</p></div>
+      <div class="schan"><span>sends the new state</span><span class="sarrow" aria-label="to GitHub">&larr;</span></div>
+      <div class="sbox"><div class="tags"><span class="tag"><i class="dot tr"></i>Tracker</span></div><h3>State changes</h3><p>Submitted, Rejected, Draft, Under review, Published or Withdrawn.</p></div>
+    </div>
+
+    <div class="srow">
+      <div class="sbox"><div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span></div><h3>Repository created in the working group organisation</h3><p>From the work item template, named <code>wg&lt;n&gt;-&lt;acronym&gt;-&lt;name&gt;</code>. The tracker's repository link is updated.</p></div>
+      <div class="schan"><span>triggers creation</span><span class="sarrow" aria-label="to GitHub">&larr;</span></div>
+      <div class="sbox"><div class="tags"><span class="tag"><i class="dot tr"></i>Tracker</span></div><h3>The work item is accepted</h3><p>By a working group, or by the new one that Incubation formed.</p></div>
+    </div>
+  </section>
+
+  <p class="sources">Based on <code>CONTRIBUTING.md</code> and <code>WG-ONBOARDING.md</code> in <code>FG-TIDA/spec-template</code>, the working group landing pages, and the contribution workflow and document states of the TIDA tracker.</p>
+</div>
+</body>
+</html>
