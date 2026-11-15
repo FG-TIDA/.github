@@ -33,8 +33,8 @@ New to GitHub or to ITU? These short step-by-step videos walk you through everyt
 | 3 | [▶️ Submit a new work item](https://github.com/FG-TIDA/.github/blob/main/TIDA_submit_new_work_item_v1.mp4) | Submit a new work item to FG-TIDA |
 | 4 | [▶️ Pull request in the browser](https://github.com/FG-TIDA/.github/blob/main/TIDA_pull_request_browser_v1.mp4) | Contribute to an existing work item directly from GitHub in your browser |
 | 5 | [▶️ Pull request with VS Code](https://github.com/FG-TIDA/.github/blob/main/TIDA_pull_request_vscode_v1.mp4) | Contribute to an existing work item from your own machine using VS Code (or any other code editor) |
-| 6 | [▶️ How to submit a ZIP](https://github.com/FG-TIDA/.github/blob/main/How%20to%20submit_ZIP_Submission_Tutorial.mp4) | Submit your new work item proposal as a ZIP file |
-| 7 | [▶️ How to use the DataTracker](https://github.com/FG-TIDA/.github/blob/main/How_to_use_DataTracker_Tutorial.mp4) | Follow work items in the TIDA DataTracker |
+| 6 | [▶️ How to submit a ZIP](https://github.com/FG-TIDA/.github/blob/main/TIDA_submit_zip_v1.mp4) | Submit your new work item proposal as a ZIP file |
+| 7 | [▶️ How to use the DataTracker](https://github.com/FG-TIDA/.github/blob/main/TIDA_datatracker_tour_v1.mp4) | Follow work items in the TIDA DataTracker |
 
 ## 🗂️ The TIDA DataTracker
 
@@ -44,7 +44,7 @@ The **[TIDA DataTracker](https://tida-datatracker.org/)** is the online hub of F
 - **Follow** each work item through its life: Submitted, Incubated, Under review, Published (or Rejected).
 - **Find** meeting information, registration, and the latest working copy and released revisions of every work item.
 
-👉 [Open the DataTracker](https://tida-datatracker.org/) · 🎬 [How to use the DataTracker (video)](https://github.com/FG-TIDA/.github/blob/main/How_to_use_DataTracker_Tutorial.mp4)
+👉 [Open the DataTracker](https://tida-datatracker.org/) · 🎬 [How to use the DataTracker (video)](https://github.com/FG-TIDA/.github/blob/main/TIDA_datatracker_tour_v1.mp4)
 
 ## Get Involved
 
