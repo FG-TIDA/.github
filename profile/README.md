@@ -18,6 +18,10 @@ Agentic AI systems now act as autonomous entities capable of reasoning, planning
 
 FG-TIDA operates under **ITU-T Study Group 17**.
 
+## 📖 How to Contribute to TIDA
+
+The reference: **[How to contribute to TIDA](https://fg-tida.github.io/.github/)** is the written guide. It covers the lifecycle of a work item, how to contribute, and how GitHub and the DataTracker stay in sync. Prefer to watch? The training videos below walk through the same steps.
+
 ## 🎬 Training Videos: Learn How to Contribute to TIDA
 
 New to GitHub or to ITU? These short step-by-step videos walk you through everything, from joining the mailing list to submitting your first work item. Pick the one you need:
@@ -31,8 +35,6 @@ New to GitHub or to ITU? These short step-by-step videos walk you through everyt
 | 5 | [▶️ Pull request with VS Code](https://github.com/FG-TIDA/.github/blob/main/TIDA_pull_request_vscode_v1.mp4) | Contribute from your own machine using VS Code |
 | 6 | [▶️ How to submit a ZIP](https://github.com/FG-TIDA/.github/blob/main/How%20to%20submit_ZIP_Submission_Tutorial.mp4) | Submit your contribution as a ZIP file |
 | 7 | [▶️ How to use the DataTracker](https://github.com/FG-TIDA/.github/blob/main/How_to_use_DataTracker_Tutorial.mp4) | Follow work items in the TIDA DataTracker |
-
-📖 Prefer reading? See the written guide: [How to contribute to TIDA](https://fg-tida.github.io/.github/).
 
 ## 🗂️ The TIDA DataTracker
 
@@ -89,6 +91,11 @@ Improve an existing work item or submit a new one: watch the [training videos](#
 
 ## Upcoming
 
-- **FG-TIDA Face-to-Face Kick-Off Meeting** — 30 Nov – 1 December 2026, Paris, France
+- **FG-TIDA Face-to-Face Kick-Off Meeting** — 30 Nov – 1 December 2026, Paris, France ([agenda](https://tida-datatracker.org/meeting/tida-2026-11-30-first-focus-group-meeting/agenda/))
 - Interregnum preparatory e-meetings running through late 2026 — see the [meetings](https://github.com/FG-TIDA/meetings) repository for dates and links
 
+---
+
+<div align="center">
+  <sub>© ITU — Focus Group on Trust and Identity for Humans and Agentic AI</sub>
+</div>
