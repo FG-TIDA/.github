@@ -73,10 +73,6 @@ Mature themes will graduate to become WGs.
 | WG1 | Continuous and Dynamic Remote Attestation for Agentic AI (CDRA) | [Access WG1](https://github.com/fg-tida-wg1) |
 | WG2 | Identity, Behaviour and Enforcement for AI Agents (IBEA) | [Access WG2](https://github.com/fg-tida-wg2) |
 
-## Contributing to TIDA
-
-Improve an existing work item or submit a new one: watch the [training videos](#-training-videos-learn-how-to-contribute-to-tida) or read the [written guide](https://fg-tida.github.io/.github/).
-
 ## Leadership
 
 **Co-Chairs**
