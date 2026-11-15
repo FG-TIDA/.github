@@ -18,6 +18,32 @@ Agentic AI systems now act as autonomous entities capable of reasoning, planning
 
 FG-TIDA operates under **ITU-T Study Group 17**.
 
+## 🎬 Training Videos: Learn How to Contribute to TIDA
+
+New to GitHub or to ITU? These short step-by-step videos walk you through everything, from joining the mailing list to submitting your first work item. Pick the one you need:
+
+| # | Video | What you'll learn |
+|:-:|:------|:------------------|
+| 1 | [▶️ Join the mailing list](https://github.com/FG-TIDA/.github/blob/main/TIDA_join_mailing_list_v1.mp4) | Subscribe to the FG-TIDA mailing list |
+| 2 | [▶️ Open an issue](https://github.com/FG-TIDA/.github/blob/main/TIDA_open_an_issue_v5.mp4) | Propose a theme or raise a topic through a GitHub Issue |
+| 3 | [▶️ Submit a new work item](https://github.com/FG-TIDA/.github/blob/main/TIDA_submit_new_work_item_v1.mp4) | Submit a new work item to FG-TIDA |
+| 4 | [▶️ Pull request in the browser](https://github.com/FG-TIDA/.github/blob/main/TIDA_pull_request_browser_v1.mp4) | Improve an existing work item directly from GitHub in your browser |
+| 5 | [▶️ Pull request with VS Code](https://github.com/FG-TIDA/.github/blob/main/TIDA_pull_request_vscode_v1.mp4) | Contribute from your own machine using VS Code |
+| 6 | [▶️ How to submit a ZIP](https://github.com/FG-TIDA/.github/blob/main/How%20to%20submit_ZIP_Submission_Tutorial.mp4) | Submit your contribution as a ZIP file |
+| 7 | [▶️ How to use the DataTracker](https://github.com/FG-TIDA/.github/blob/main/How_to_use_DataTracker_Tutorial.mp4) | Follow work items in the TIDA DataTracker |
+
+📖 Prefer reading? See the written guide: [How to contribute to TIDA](https://fg-tida.github.io/.github/).
+
+## 🗂️ The TIDA DataTracker
+
+The **[TIDA DataTracker](https://tida-datatracker.org/)** is the online hub of FG-TIDA and its official record. It holds the group's documents, working groups, meetings, agendas, minutes, slides and recordings.
+
+- **Submit** your contribution (a new work item) before the contribution deadline, directly through the DataTracker, from a GitHub repository or a ZIP upload.
+- **Follow** each work item through its life: Submitted, Incubated, Under review, Published (or Rejected).
+- **Find** meeting information, registration, and the latest working copy and released revisions of every work item.
+
+👉 [Open the DataTracker](https://tida-datatracker.org/) · 🎬 [How to use the DataTracker (video)](https://github.com/FG-TIDA/.github/blob/main/How_to_use_DataTracker_Tutorial.mp4)
+
 ## Get Involved
 
 - 📄 [Terms of Reference](https://www.itu.int/en/ITU-T/focusgroups/tida/Pages/ToR.aspx)
@@ -39,15 +65,15 @@ Mature themes will graduate to become WGs.
 
 ## Established Working Groups
 
-| Working Group | Link |
-|:--------------|:-----|
-| WG0 | [Access WG0](https://github.com/fg-tida-wg0) |
-| WG1 | [Access WG1](https://github.com/fg-tida-wg1) |
-| WG2 | [Access WG2](https://github.com/fg-tida-wg2) |
+| Working Group | Name | Link |
+|:--------------|:-----|:-----|
+| WG0 | Use Cases and Terminology (UCT) | [Access WG0](https://github.com/fg-tida-wg0) |
+| WG1 | Continuous and Dynamic Remote Attestation for Agentic AI (CDRA) | [Access WG1](https://github.com/fg-tida-wg1) |
+| WG2 | Identity, Behaviour and Enforcement for AI Agents (IBEA) | [Access WG2](https://github.com/fg-tida-wg2) |
 
 ## Contributing to TIDA
 
-Improve an existing work item or submit a new one: [see how to contribute](https://fg-tida.github.io/.github/).
+Improve an existing work item or submit a new one: watch the [training videos](#-training-videos-learn-how-to-contribute-to-tida) or read the [written guide](https://fg-tida.github.io/.github/).
 
 ## Leadership
 
@@ -66,8 +92,3 @@ Improve an existing work item or submit a new one: [see how to contribute](https
 - **FG-TIDA Face-to-Face Kick-Off Meeting** — 30 Nov – 1 December 2026, Paris, France
 - Interregnum preparatory e-meetings running through late 2026 — see the [meetings](https://github.com/FG-TIDA/meetings) repository for dates and links
 
----
-
-<div align="center">
-  <sub>© ITU — Focus Group on Trust and Identity for Humans and Agentic AI</sub>
-</div>
