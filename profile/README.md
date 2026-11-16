@@ -28,13 +28,13 @@ New to GitHub or to ITU? These short step-by-step videos walk you through everyt
 
 | # | Video | What you'll learn |
 |:-:|:------|:------------------|
-| 1 | [▶️ Join the mailing list](https://github.com/FG-TIDA/.github/blob/main/TIDA_join_mailing_list_v1.mp4) | Subscribe to the FG-TIDA mailing list |
-| 2 | [▶️ Open an issue](https://github.com/FG-TIDA/.github/blob/main/TIDA_open_an_issue_v5.mp4) | Propose a theme or raise a topic through a GitHub Issue |
-| 3 | [▶️ Submit a new work item](https://github.com/FG-TIDA/.github/blob/main/TIDA_submit_new_work_item_v1.mp4) | Submit a new work item to FG-TIDA |
-| 4 | [▶️ Pull request in the browser](https://github.com/FG-TIDA/.github/blob/main/TIDA_pull_request_browser_v1.mp4) | Contribute to an existing work item directly from GitHub in your browser |
-| 5 | [▶️ Pull request with VS Code](https://github.com/FG-TIDA/.github/blob/main/TIDA_pull_request_vscode_v1.mp4) | Contribute to an existing work item from your own machine using VS Code (or any other code editor) |
-| 6 | [▶️ How to submit a ZIP](https://github.com/FG-TIDA/.github/blob/main/TIDA_submit_zip_v1.mp4) | Submit your new work item proposal as a ZIP file |
-| 7 | [▶️ How to use the DataTracker](https://github.com/FG-TIDA/.github/blob/main/TIDA_datatracker_tour_v1.mp4) | Follow work items in the TIDA DataTracker |
+| 1 | [▶️ Join the mailing list](https://tida-datatracker.org/training/7/) | Subscribe to the FG-TIDA mailing list |
+| 2 | [▶️ Open an issue](https://tida-datatracker.org/training/6/) | Propose a theme or raise a topic through a GitHub Issue |
+| 3 | [▶️ Submit a new work item](https://tida-datatracker.org/training/5/) | Submit a new work item to FG-TIDA |
+| 4 | [▶️ Pull request in the browser](https://tida-datatracker.org/training/4/) | Contribute to an existing work item directly from GitHub in your browser |
+| 5 | [▶️ Pull request with VS Code](https://tida-datatracker.org/training/3/) | Contribute to an existing work item from your own machine using VS Code (or any other code editor) |
+| 6 | [▶️ How to submit a ZIP](https://tida-datatracker.org/training/2/) | Submit your new work item proposal as a ZIP file |
+| 7 | [▶️ How to use the DataTracker](https://tida-datatracker.org/training/1/) | Follow work items in the TIDA DataTracker |
 
 ## 🗂️ The TIDA DataTracker
 
