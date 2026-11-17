@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
 <style>
-/* Layout: the work item lifecycle is the spine at the top; below it one start node splits into two paths (existing work item / new work item) whose steps carry the lifecycle state they happen in; a sync band closes the page. */
 :root {
   --bg: #F6F8FA;
   --surface: #FFFFFF;
@@ -22,98 +23,316 @@
   --gh: #13202C;
   --tr: #1B58B8;
   --ml: #9A5B00;
-  /* lifecycle state colours follow the tracker markers: blue submitted, grey draft, amber under review, green approved/published, red withdrawn */
-  --st-blue: #1B58B8;  --st-blue-bg: #E8F0FC;
-  --st-grey: #4A5866;  --st-grey-bg: #ECEFF3;
-  --st-amber: #8A5200; --st-amber-bg: #FFF1D6;
-  --st-green: #0B6B4F; --st-green-bg: #E0F3EB;
-  --st-red: #A32626;   --st-red-bg: #FBE6E6;
-  --st-violet: #6B3FA0; --st-violet-bg: #F0E9FA;
-  /* v2 palette: one colour per state and per action, distinct for colour-blind readers */
-  --c-sub: #1B58B8;  --c-sub-bg: #E8F0FC;   /* Submitted: blue, light */
-  --c-inc: #8A6D00;  --c-inc-bg: #FFF4B8;   /* Incubated: yellow, very light */
-  --c-rev: #7A3E00;  --c-rev-bg: #F6B26B;   /* Under review: orange, medium */
-  --c-pub: #1F3A5F;  --c-pub-bg: #1F3A5F;   /* Published: navy, filled, white text */
-  --c-rej: #8E1A62;  --c-rej-bg: #F3C6E0;   /* Rejected: magenta, light */
-  --c-act: #4A5866;  --c-act-bg: #ECEFF3;   /* action (WG formed or charter amended): grey */
-  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --st-blue: #1B58B8;
+  --st-blue-bg: #E8F0FC;
+  --st-grey: #4A5866;
+  --st-grey-bg: #ECEFF3;
+  --st-amber: #8A5200;
+  --st-amber-bg: #FFF1D6;
+  --st-green: #0B6B4F;
+  --st-green-bg: #E0F3EB;
+  --st-red: #A32626;
+  --st-red-bg: #FBE6E6;
+  --st-violet: #6B3FA0;
+  --st-violet-bg: #F0E9FA;
+
+  --c-sub: #1B58B8;
+  --c-sub-bg: #E8F0FC;
+  --c-inc: #8A6D00;
+  --c-inc-bg: #FFF4B8;
+  --c-rev: #7A3E00;
+  --c-rev-bg: #F6B26B;
+  --c-pub: #1F3A5F;
+  --c-pub-bg: #1F3A5F;
+  --c-rej: #8E1A62;
+  --c-rej-bg: #F3C6E0;
+  --c-act: #4A5866;
+  --c-act-bg: #ECEFF3;
+
+  --font-body: "IBM Plex Sans", system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace,
+    "SF Mono", Menlo, monospace;
 }
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0D141B; --surface: #151E27; --ink: #E5ECF3; --muted: #9AABBB; --line: #2B3846;
-    --a: #7DAEFF; --b: #4FC9A9; --a-tint: #16263D; --b-tint: #12302A;
-    --gh: #E5ECF3; --tr: #7DAEFF; --ml: #E6AD55;
-    --st-blue: #7DAEFF;  --st-blue-bg: #16263D;
-    --st-grey: #A9B6C3;  --st-grey-bg: #1F2A35;
-    --st-amber: #E6AD55; --st-amber-bg: #302410;
-    --st-green: #4FC9A9; --st-green-bg: #12302A;
-    --st-red: #FF8A8A;   --st-red-bg: #3A1717;
-    --st-violet: #C3A6F2; --st-violet-bg: #2A1F3D;
+    --bg: #0D141B;
+    --surface: #151E27;
+    --ink: #E5ECF3;
+    --muted: #9AABBB;
+    --line: #2B3846;
+    --a: #7DAEFF;
+    --b: #4FC9A9;
+    --a-tint: #16263D;
+    --b-tint: #12302A;
+    --gh: #E5ECF3;
+    --tr: #7DAEFF;
+    --ml: #E6AD55;
+    --st-blue: #7DAEFF;
+    --st-blue-bg: #16263D;
+    --st-grey: #A9B6C3;
+    --st-grey-bg: #1F2A35;
+    --st-amber: #E6AD55;
+    --st-amber-bg: #302410;
+    --st-green: #4FC9A9;
+    --st-green-bg: #12302A;
+    --st-red: #FF8A8A;
+    --st-red-bg: #3A1717;
+    --st-violet: #C3A6F2;
+    --st-violet-bg: #2A1F3D;
     color-scheme: dark;
   }
 }
+
 :root[data-theme="dark"] {
-  --bg: #0D141B; --surface: #151E27; --ink: #E5ECF3; --muted: #9AABBB; --line: #2B3846;
-  --a: #7DAEFF; --b: #4FC9A9; --a-tint: #16263D; --b-tint: #12302A;
-  --gh: #E5ECF3; --tr: #7DAEFF; --ml: #E6AD55;
-  --st-blue: #7DAEFF;  --st-blue-bg: #16263D;
-  --st-grey: #A9B6C3;  --st-grey-bg: #1F2A35;
-  --st-amber: #E6AD55; --st-amber-bg: #302410;
-  --st-green: #4FC9A9; --st-green-bg: #12302A;
-  --st-red: #FF8A8A;   --st-red-bg: #3A1717;
-    --st-violet: #C3A6F2; --st-violet-bg: #2A1F3D;
+  --bg: #0D141B;
+  --surface: #151E27;
+  --ink: #E5ECF3;
+  --muted: #9AABBB;
+  --line: #2B3846;
+  --a: #7DAEFF;
+  --b: #4FC9A9;
+  --a-tint: #16263D;
+  --b-tint: #12302A;
+  --gh: #E5ECF3;
+  --tr: #7DAEFF;
+  --ml: #E6AD55;
+  --st-blue: #7DAEFF;
+  --st-blue-bg: #16263D;
+  --st-grey: #A9B6C3;
+  --st-grey-bg: #1F2A35;
+  --st-amber: #E6AD55;
+  --st-amber-bg: #302410;
+  --st-green: #4FC9A9;
+  --st-green-bg: #12302A;
+  --st-red: #FF8A8A;
+  --st-red-bg: #3A1717;
+  --st-violet: #C3A6F2;
+  --st-violet-bg: #2A1F3D;
   color-scheme: dark;
 }
-* { box-sizing: border-box; }
 
-body { margin: 0; }
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background: var(--bg); color: var(--ink);
-  font-family: var(--font-body); font-size: 15px; line-height: 1.5;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 32px 56px;
 }
-.wrap { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
-h1, h2, h3 { text-wrap: balance; margin: 0; line-height: 1.2; }
-h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 600; letter-spacing: -0.01em; }
+
+.wrap {
+  max-width: 1120px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
+  margin: 0;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(26px, 4vw, 36px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
 p { margin: 0; }
-.lead { color: var(--muted); max-width: 62ch; margin-top: 8px; font-size: 16px; }
+
+/* UPDATED: use the full content width */
+.lead {
+  color: var(--muted);
+  max-width: none;
+  width: 100%;
+  margin-top: 8px;
+  font-size: 16px;
+}
+
 a { color: var(--a); }
-code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500; }
 
-.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
-.dot.gh { background: var(--gh); } .dot.tr { background: var(--tr); } .dot.ml { background: var(--ml); }
+code, .mono {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  font-weight: 500;
+}
 
-/* lifecycle state chip: colour plus the state's name, never colour alone */
-.st { --sc: var(--st-grey); --sbg: var(--st-grey-bg); display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--sc); background: var(--sbg); border: 1.5px solid var(--sc); border-radius: 999px; padding: 1px 10px; white-space: nowrap; }
-.st.blue { --sc: var(--st-blue); --sbg: var(--st-blue-bg); }
-.st.amber { --sc: var(--st-amber); --sbg: var(--st-amber-bg); }
-.st.green { --sc: var(--st-green); --sbg: var(--st-green-bg); }
-.st.red { --sc: var(--st-red); --sbg: var(--st-red-bg); }
-.st.sub { --sc: var(--c-sub); --sbg: var(--c-sub-bg); }
-.st.inc { --sc: var(--c-inc); --sbg: var(--c-inc-bg); }
-.st.rev { --sc: var(--c-rev); --sbg: var(--c-rev-bg); }
-.st.pub { --sc: var(--c-pub); --sbg: var(--c-pub-bg); color: #fff; }
-.st.rej { --sc: var(--c-rej); --sbg: var(--c-rej-bg); }
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
 
-/* lifecycle flow */
-.life { display: flex; flex-direction: column; gap: 12px; border-top: 4px solid var(--ink); padding-top: 12px; }
-.life h2 { font-size: 22px; font-weight: 600; }
-.life > p { color: var(--muted); font-size: 14px; max-width: 72ch; margin-top: -6px; }
-.life figure { margin: 0; display: flex; flex-direction: column; gap: 8px; }
-.flowbox { overflow-x: auto; border: 1.5px solid var(--line); border-radius: 10px; background: var(--surface); padding: 8px; }
-.flow { display: block; width: 100%; min-width: 1180px; height: auto; }
-.defs-title { font-size: 16px; font-weight: 600; margin: 4px 0 0; }
-.hint { display: none; font-size: 12.5px; color: var(--muted); }
-@media (max-width: 1200px) { .hint { display: block; } }
-/* roles and timeline table */
-.roles { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: 4px; }
-.roles th, .roles td { text-align: left; vertical-align: top; padding: 6px 10px; border-bottom: 1px solid var(--line); }
-.roles th { font-weight: 600; color: var(--ink); white-space: nowrap; }
+.dot.gh { background: var(--gh); }
+.dot.tr { background: var(--tr); }
+.dot.ml { background: var(--ml); }
+
+.st {
+  --sc: var(--st-grey);
+  --sbg: var(--st-grey-bg);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--sc);
+  background: var(--sbg);
+  border: 1.5px solid var(--sc);
+  border-radius: 999px;
+  padding: 1px 10px;
+  white-space: nowrap;
+}
+
+.st.blue {
+  --sc: var(--st-blue);
+  --sbg: var(--st-blue-bg);
+}
+
+.st.amber {
+  --sc: var(--st-amber);
+  --sbg: var(--st-amber-bg);
+}
+
+.st.green {
+  --sc: var(--st-green);
+  --sbg: var(--st-green-bg);
+}
+
+.st.red {
+  --sc: var(--st-red);
+  --sbg: var(--st-red-bg);
+}
+
+.st.sub {
+  --sc: var(--c-sub);
+  --sbg: var(--c-sub-bg);
+}
+
+.st.inc {
+  --sc: var(--c-inc);
+  --sbg: var(--c-inc-bg);
+}
+
+.st.rev {
+  --sc: var(--c-rev);
+  --sbg: var(--c-rev-bg);
+}
+
+.st.pub {
+  --sc: var(--c-pub);
+  --sbg: var(--c-pub-bg);
+  color: #fff;
+}
+
+.st.rej {
+  --sc: var(--c-rej);
+  --sbg: var(--c-rej-bg);
+}
+
+/* Work item lifecycle */
+.life {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 4px solid var(--ink);
+  padding-top: 12px;
+}
+
+.life h2 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* UPDATED: lifecycle description uses full content width */
+.life > p {
+  color: var(--muted);
+  font-size: 14px;
+  max-width: none;
+  width: 100%;
+  margin-top: -6px;
+}
+
+.life figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.flowbox {
+  overflow-x: auto;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 8px;
+}
+
+.flow {
+  display: block;
+  width: 100%;
+  min-width: 1180px;
+  height: auto;
+}
+
+.defs-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 4px 0 0;
+}
+
+.hint {
+  display: none;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+@media (max-width: 1200px) {
+  .hint { display: block; }
+}
+
+.roles {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  margin-top: 4px;
+}
+
+.roles th,
+.roles td {
+  text-align: left;
+  vertical-align: top;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.roles th {
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
 .roles td { color: var(--muted); }
-.roles td strong { color: var(--ink); font-weight: 600; }
+
+.roles td strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* SVG flowchart */
 .node { stroke-width: 2; }
 .n-grey { fill: var(--st-grey-bg); stroke: var(--st-grey); }
 .n-blue { fill: var(--st-blue-bg); stroke: var(--st-blue); }
@@ -126,11 +345,20 @@ code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500
 .n-rev { fill: var(--c-rev-bg); stroke: var(--c-rev); }
 .n-pub { fill: var(--c-pub-bg); stroke: var(--c-pub); }
 .n-rej { fill: var(--c-rej-bg); stroke: var(--c-rej); }
-.n-act { fill: var(--c-act-bg); stroke: var(--c-act); }
+.n-act {
+  fill: var(--c-act-bg);
+  stroke: var(--c-act);
+  stroke-width: 2;
+}
 .t-w { fill: #fff; }
 .n-dash { stroke-dasharray: 6 4; }
-.dec { fill: var(--surface); stroke: var(--st-blue); stroke-width: 2.5; }
-.n-act { stroke-width: 2; }
+
+.dec {
+  fill: var(--surface);
+  stroke: var(--st-blue);
+  stroke-width: 2.5;
+}
+
 .t-yn { font: 700 13px var(--font-body); fill: var(--ink); }
 .t-name { font: 600 14px var(--font-body); fill: var(--ink); }
 .t-name-s { font-size: 12.5px; }
@@ -139,446 +367,1530 @@ code, .mono { font-family: var(--font-mono); font-size: 0.86em; font-weight: 500
 .t-lab { font: 500 12px var(--font-body); fill: var(--ink); }
 .t-labm { font: 500 12px var(--font-body); fill: var(--muted); }
 .t-labr { font: 500 12px var(--font-body); fill: var(--st-red); }
+
 .edge { fill: none; stroke: var(--ink); stroke-width: 2.5; }
 .edge-m { fill: none; stroke: var(--muted); stroke-width: 2; }
-.edge-r { fill: none; stroke: var(--st-red); stroke-width: 2; stroke-dasharray: 5 4; }
-.ah { fill: var(--ink); } .ahm { fill: var(--muted); } .ahr { fill: var(--st-red); }
-.defs { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px 20px; margin: 4px 0 0; }
+.edge-r {
+  fill: none;
+  stroke: var(--st-red);
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+}
+
+.ah { fill: var(--ink); }
+.ahm { fill: var(--muted); }
+.ahr { fill: var(--st-red); }
+
+.defs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px 20px;
+  margin: 4px 0 0;
+}
+
 .defs dt { margin: 0 0 4px; }
-.defs dd { margin: 0; font-size: 13.5px; color: var(--muted); }
 
-/* start node */
-.start { display: flex; flex-direction: column; gap: 12px; border-top: 4px solid var(--ink); padding-top: 12px; }
-.start h2 { font-size: 22px; font-weight: 600; }
-.fork { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-.fork a { text-decoration: none; font-weight: 500; font-size: 14px; padding: 7px 14px; border-radius: 999px; border: 1.5px solid currentColor; background: var(--surface); }
-.fork a.a { color: var(--a); } .fork a.b { color: var(--b); }
+.defs dd {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+/* Contribution entry point */
+.start {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 4px solid var(--ink);
+  padding-top: 12px;
+}
+
+.start h2 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.fork {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.fork a {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1.5px solid currentColor;
+  background: var(--surface);
+}
+
+.fork a.a { color: var(--a); }
+.fork a.b { color: var(--b); }
 .fork a:hover { background: var(--bg); }
-.fork a:focus-visible { outline: 3px solid currentColor; outline-offset: 2px; }
 
-/* two paths */
-.paths { display: flex; flex-direction: column; gap: 48px; }
-.path { --c: var(--a); --tint: var(--a-tint); display: flex; flex-direction: column; gap: 14px; min-width: 0; scroll-margin-top: 16px; }
-.path.b { --c: var(--b); --tint: var(--b-tint); }
-.path-head { display: flex; flex-direction: column; gap: 6px; }
-.path-head h3 { font-size: 20px; font-weight: 600; color: var(--c); }
-.path-head p { color: var(--muted); font-size: 14px; }
-.path-head .states { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+.fork a:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 2px;
+}
 
-.steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.step { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; position: relative; padding-bottom: 14px; }
-.step::before { content: ""; position: absolute; left: 16px; top: 34px; bottom: -2px; width: 2px; background: var(--line); }
+/* Contribution paths */
+.paths {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.path {
+  --c: var(--a);
+  --tint: var(--a-tint);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  scroll-margin-top: 16px;
+}
+
+.path.b {
+  --c: var(--b);
+  --tint: var(--b-tint);
+}
+
+.path-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.path-head h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--c);
+}
+
+.path-head p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.path-head .states {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 12px;
+  position: relative;
+  padding-bottom: 14px;
+}
+
+.step::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 34px;
+  bottom: -2px;
+  width: 2px;
+  background: var(--line);
+}
+
 .step:last-child { padding-bottom: 0; }
 .step:last-child::before { display: none; }
-.step::after { content: ""; position: absolute; left: 11px; bottom: 2px; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid var(--line); }
+
+.step::after {
+  content: "";
+  position: absolute;
+  left: 11px;
+  bottom: 2px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid var(--line);
+}
+
 .step:last-child::after { display: none; }
-.num { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--c); color: var(--c); background: var(--surface); display: grid; place-items: center; font-family: var(--font-mono); font-weight: 500; font-size: 14px; z-index: 1; }
-.card { background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 14px 16px 16px; min-width: 0; margin-bottom: 14px; }
+
+.num {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--c);
+  color: var(--c);
+  background: var(--surface);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 14px;
+  z-index: 1;
+}
+
+.card {
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px 16px;
+  min-width: 0;
+  margin-bottom: 14px;
+}
+
 .step:last-child .card { margin-bottom: 0; }
 .card.decide { border-color: var(--c); }
 .card h3 { font-size: 16px; font-weight: 600; }
-.card p { color: var(--muted); font-size: 14px; margin-top: 4px; }
-.card p strong, .card li strong { color: var(--ink); font-weight: 600; }
-.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; align-items: center; }
-.tag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px 2px 7px; color: var(--ink); background: var(--bg); }
 
-/* decision options */
-.qh { margin: 14px 0 0; font-size: 14.5px; font-weight: 600; }
-.opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin-top: 12px; }
-.opt { border: 1.5px solid var(--line); border-left: 4px solid var(--c); border-radius: 8px; padding: 10px 12px; background: var(--bg); min-width: 0; }
-.opt .if { font-size: 12.5px; color: var(--muted); }
-.opt h4 { margin: 2px 0 4px; font-size: 14.5px; font-weight: 600; }
-.opt p, .opt ol { font-size: 13.5px; color: var(--muted); margin-top: 0; }
-.opt ol { margin: 4px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 2px; }
-.outcomes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
-@media (max-width: 480px) { .outcomes { grid-template-columns: minmax(0, 1fr); } }
-.out { border-radius: 8px; padding: 9px 12px; font-size: 13.5px; border: 1.5px solid var(--line); background: var(--bg); color: var(--muted); display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
-.out strong { color: var(--ink); font-size: 14px; }
-.end { border: 2px solid var(--c); border-radius: 10px; padding: 12px 16px; background: var(--tint); font-size: 14px; }
+.card p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.card p strong,
+.card li strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 9px 2px 7px;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+.qh {
+  margin: 14px 0 0;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+
+.opts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.opt {
+  border: 1.5px solid var(--line);
+  border-left: 4px solid var(--c);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: var(--bg);
+  min-width: 0;
+}
+
+.opt .if {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.opt h4 {
+  margin: 2px 0 4px;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+
+.opt p,
+.opt ol {
+  font-size: 13.5px;
+  color: var(--muted);
+  margin-top: 0;
+}
+
+.opt ol {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.outcomes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+@media (max-width: 480px) {
+  .outcomes { grid-template-columns: minmax(0, 1fr); }
+}
+
+.out {
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 13.5px;
+  border: 1.5px solid var(--line);
+  background: var(--bg);
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.out strong {
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.end {
+  border: 2px solid var(--c);
+  border-radius: 10px;
+  padding: 12px 16px;
+  background: var(--tint);
+  font-size: 14px;
+}
+
 .end strong { color: var(--ink); }
 .end a { font-weight: 500; }
 
-/* sync */
-.sync { display: flex; flex-direction: column; gap: 14px; border-top: 4px solid var(--ink); padding-top: 12px; }
-.sync h2 { font-size: 22px; font-weight: 600; }
-.sync > p { color: var(--muted); font-size: 14px; max-width: 72ch; margin-top: -6px; }
-.scols, .srow { display: grid; grid-template-columns: minmax(0, 1fr) 160px minmax(0, 1fr); gap: 12px; }
-.scols { font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
-.scols span:first-child { grid-column: 1; } .scols span:last-child { grid-column: 3; text-align: right; }
-.sbox { background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px; min-width: 0; }
-.sbox h3 { font-size: 15px; font-weight: 600; }
-.sbox p { color: var(--muted); font-size: 13.5px; margin-top: 4px; }
-.schan { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 2px; color: var(--muted); font-size: 12.5px; }
-.sarrow { display: inline-block; font-size: 30px; line-height: 1; color: var(--ink); }
-@media (max-width: 760px) {
-  .scols { display: none; }
-  .srow { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-  .schan { flex-direction: row; justify-content: center; gap: 12px; }
-  .sarrow { transform: rotate(90deg); font-size: 26px; }
+/* GitHub and DataTracker synchronisation */
+.sync {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-top: 4px solid var(--ink);
+  padding-top: 12px;
 }
 
-@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
-.submission-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.sync h2 { font-size: 22px; font-weight: 600; }
+
+.sync > p {
+  color: var(--muted);
+  font-size: 14px;
+  max-width: 72ch;
+  margin-top: -6px;
+}
+
+.scols,
+.srow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 160px minmax(0, 1fr);
+  gap: 12px;
+}
+
+.scols {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.scols span:first-child { grid-column: 1; }
+.scols span:last-child {
+  grid-column: 3;
+  text-align: right;
+}
+
+.sbox {
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  min-width: 0;
+}
+
+.sbox h3 { font-size: 15px; font-weight: 600; }
+
+.sbox p {
+  color: var(--muted);
+  font-size: 13.5px;
+  margin-top: 4px;
+}
+
+.schan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2px;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.sarrow {
+  display: inline-block;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+@media (max-width: 760px) {
+  .scols { display: none; }
+  .srow {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+  .schan {
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+  }
+  .sarrow {
+    transform: rotate(90deg);
+    font-size: 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+}
+
+.submission-options {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .submission-options ol { gap: 8px; }
-.word-fallback { margin-top: 16px; border: 1.5px solid var(--st-amber); border-radius: 8px; padding: 12px 14px; }
-.word-fallback summary { cursor: pointer; font-weight: 600; color: var(--st-amber); }
-.word-fallback summary:focus-visible { outline: 2px solid var(--a); outline-offset: 4px; }
+
+.word-fallback {
+  margin-top: 16px;
+  border: 1.5px solid var(--st-amber);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.word-fallback summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--st-amber);
+}
+
+.word-fallback summary:focus-visible {
+  outline: 2px solid var(--a);
+  outline-offset: 4px;
+}
+
 .word-fallback p { margin-top: 10px; }
 .card code { overflow-wrap: anywhere; }
-@media (max-width: 700px) { .submission-options { grid-template-columns: minmax(0, 1fr); } }
-</style>
 
+@media (max-width: 700px) {
+  .submission-options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+</style>
 </head>
+
 <body>
 <div class="wrap">
-  <header>
-    <h1>How to contribute to TIDA</h1>
-    <p class="lead">TIDA work is organised in work items. Every work item moves through the same lifecycle, and you can contribute at either end of it: improve a work item that exists, or submit a new one.</p>
-  </header>
 
-  <section class="life" aria-labelledby="hl">
-    <h2 id="hl">The lifecycle of a work item</h2>
-    <p>A work item enters the TIDA DataTracker as Submitted. The TIDA DataTracker is the official record and holds the state of every work item; the GitHub repository shows it. Two different questions are answered in turn, by two different bodies: <strong>where does it go?</strong> is answered by the Focus Group plenary, on a proposal of the incubation committee; <strong>is it adopted?</strong> is answered by the working group that receives it. A work item that no working group can host yet is not rejected: it waits in the <strong>incubation queue</strong> until a working group is formed or a charter is amended. Once dispatched to a working group, the work item stays there: it is adopted or rejected by that group.</p>
-    <figure>
-      <div class="flowbox">
-      <svg class="flow" viewBox="0 24 1330 422" role="img" aria-label="Work item lifecycle: a work item is Submitted to the TIDA DataTracker before the contribution deadline. The plenary, on the proposal of the incubation committee, decides where it goes: allocated to a working group, or to the incubation queue (Incubated) when no working group can host it yet. A work item allocated to a working group is adopted by it and goes Under review, or is rejected by it. From the incubation queue, on the proposal of the incubation committee, the plenary decides whether to form a working group or amend a charter; if it agrees, a working group is formed or its charter amended and the work item goes Under review in it; otherwise it stays in the queue; a work item stalled in the queue for more than six months is Rejected. Under review becomes Published when the working group approves. Rejected is final.">
+<header>
+  <h1>How to contribute to TIDA</h1>
+  <p class="lead">
+    TIDA work is organised in work items. Every work item moves through
+    the same lifecycle, and you can contribute at either end of it:
+    improve a work item that exists, or submit a new one.
+  </p>
+</header>
+
+<section class="life" aria-labelledby="hl">
+  <h2 id="hl">The lifecycle of a work item</h2>
+
+  <p>
+    A work item enters the TIDA DataTracker as Submitted. The TIDA
+    DataTracker is the official record and holds the state of every work
+    item; the GitHub repository shows it. Two different questions are
+    answered in turn, by two different bodies: <strong>where does it
+    go?</strong> is answered by the Focus Group plenary, on a proposal
+    of the incubation committee; <strong>is it adopted?</strong> is
+    answered by the working group that receives it. A work item that no
+    working group can host yet is not rejected: it waits in the
+    <strong>incubation queue</strong> until a working group is formed or
+    a charter is amended. Once dispatched to a working group, the work
+    item stays there: it is adopted or rejected by that group.
+  </p>
+
+  <figure>
+    <div class="flowbox">
+      <svg class="flow" viewBox="0 24 1330 422" role="img"
+        aria-label="Work item lifecycle: Submitted, allocated by the plenary to an existing working group or the incubation queue. The working group adopts or rejects the item. Adopted items go Under review and then Published. Incubated items await formation of a working group or amendment of a charter.">
+
         <defs>
-          <marker id="ah" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker>
-          <marker id="ahm" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path class="ahm" d="M0,0 L10,5 L0,10 z"/></marker>
-          <marker id="ahr" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path class="ahr" d="M0,0 L10,5 L0,10 z"/></marker>
+          <marker id="ah" viewBox="0 0 10 10"
+            refX="10" refY="5" markerUnits="userSpaceOnUse"
+            markerWidth="11" markerHeight="11" orient="auto">
+            <path class="ah" d="M0,0 L10,5 L0,10 z"/>
+          </marker>
+          <marker id="ahm" viewBox="0 0 10 10"
+            refX="10" refY="5" markerUnits="userSpaceOnUse"
+            markerWidth="11" markerHeight="11" orient="auto">
+            <path class="ahm" d="M0,0 L10,5 L0,10 z"/>
+          </marker>
+          <marker id="ahr" viewBox="0 0 10 10"
+            refX="10" refY="5" markerUnits="userSpaceOnUse"
+            markerWidth="11" markerHeight="11" orient="auto">
+            <path class="ahr" d="M0,0 L10,5 L0,10 z"/>
+          </marker>
         </defs>
-        <!-- Row A: Submitted, plenary dispatches (on the incubation committee proposal), WG adopts, Under review, Published -->
-        <path class="edge" d="M124,104 H215" marker-end="url(#ah)"/>
-        <path class="edge" d="M445,104 H750" marker-end="url(#ah)"/>
-        <text class="t-yn" x="467" y="94" text-anchor="middle">Y</text>
-        <path class="edge" d="M890,104 H960" marker-end="url(#ah)"/>
-        <text class="t-yn" x="925" y="94" text-anchor="middle">Y</text>
-        <path class="edge" d="M1084,104 H1180" marker-end="url(#ah)"/>
-        <text class="t-lab" x="1132" y="94" text-anchor="middle">WG approves</text>
-        <!-- Plenary: no working group can host it yet -->
-        <path class="edge" d="M330,174 V296" marker-end="url(#ah)"/>
+
+        <!-- Main workflow -->
+        <path class="edge" d="M124,104 H215"
+          marker-end="url(#ah)"/>
+        <path class="edge" d="M445,104 H750"
+          marker-end="url(#ah)"/>
+        <text class="t-yn" x="467" y="94"
+          text-anchor="middle">Y</text>
+
+        <path class="edge" d="M890,104 H960"
+          marker-end="url(#ah)"/>
+        <text class="t-yn" x="925" y="94"
+          text-anchor="middle">Y</text>
+
+        <path class="edge" d="M1084,104 H1180"
+          marker-end="url(#ah)"/>
+        <text class="t-lab" x="1132" y="94"
+          text-anchor="middle">WG approves</text>
+
+        <!-- No existing working group -->
+        <path class="edge" d="M330,174 V296"
+          marker-end="url(#ah)"/>
         <text class="t-yn" x="342" y="196">N</text>
-        <!-- WG does not adopt: rejected -->
-        <path class="edge-m" d="M820,149 V200" marker-end="url(#ahm)"/>
+
+        <!-- WG rejection -->
+        <path class="edge-m" d="M820,149 V200"
+          marker-end="url(#ahm)"/>
         <text class="t-yn" x="832" y="172">N</text>
-        <!-- Incubated: stalled for more than 6 months -> Rejected -->
-        <path class="edge-m" d="M380,296 V224 H768" marker-end="url(#ahm)"/>
-        <text class="t-labm" x="574" y="216" text-anchor="middle">if stalled for more than 6 months</text>
-        <!-- Row B: incubation queue, plenary (on the incubation committee proposal), WG formed or charter amended, then Under review -->
-        <path class="edge" d="M395,330 H475" marker-end="url(#ah)"/>
-        <path class="edge" d="M725,330 H760" marker-end="url(#ah)"/>
-        <text class="t-yn" x="742" y="320" text-anchor="middle">Y</text>
-        <path class="edge" d="M930,330 H1000 V138" marker-end="url(#ah)"/>
-        <path class="edge-m" d="M600,400 V420 H330 V364" marker-end="url(#ahm)"/>
+
+        <!-- Stalled incubation -->
+        <path class="edge-m" d="M380,296 V224 H768"
+          marker-end="url(#ahm)"/>
+        <text class="t-labm" x="574" y="216"
+          text-anchor="middle">
+          if stalled for more than 6 months
+        </text>
+
+        <!-- Incubation workflow -->
+        <path class="edge" d="M395,330 H475"
+          marker-end="url(#ah)"/>
+        <path class="edge" d="M725,330 H760"
+          marker-end="url(#ah)"/>
+        <text class="t-yn" x="742" y="320"
+          text-anchor="middle">Y</text>
+
+        <path class="edge" d="M930,330 H1000 V138"
+          marker-end="url(#ah)"/>
+
+        <path class="edge-m" d="M600,400 V420 H330 V364"
+          marker-end="url(#ahm)"/>
         <text class="t-yn" x="612" y="416">N</text>
-        <text class="t-labm" x="470" y="414" text-anchor="middle">stays in the queue</text>
-        <!-- states -->
-        <rect class="node n-sub" x="20" y="70" width="104" height="68" rx="10"/>
-        <text class="t-name" x="72" y="96" text-anchor="middle">Submitted</text>
-        <text class="t-sub" x="72" y="113" text-anchor="middle">TIDA DataTracker</text>
-        <text class="t-sub" x="72" y="128" text-anchor="middle">before the deadline</text>
-        <polygon class="node dec" points="330,34 445,104 330,174 215,104"/>
-        <text class="t-name t-name-s" x="330" y="90" text-anchor="middle">Plenary: allocated to</text>
-        <text class="t-name t-name-s" x="330" y="108" text-anchor="middle">an existing WG n?</text>
-        <text class="t-sub" x="330" y="124" text-anchor="middle">on the incubation</text>
-        <text class="t-sub" x="330" y="138" text-anchor="middle">committee proposal</text>
-        <polygon class="node dec" points="820,59 890,104 820,149 750,104"/>
-        <text class="t-name t-name-s" x="820" y="100" text-anchor="middle">WG n:</text>
-        <text class="t-name t-name-s" x="820" y="118" text-anchor="middle">adopts?</text>
-        <rect class="node n-rev" x="960" y="70" width="124" height="68" rx="10"/>
-        <text class="t-name" x="1022" y="96" text-anchor="middle">Under review</text>
-        <text class="t-sub" x="1022" y="113" text-anchor="middle">GitHub</text>
-        <text class="t-open" x="1022" y="129" text-anchor="middle">contribute here</text>
-        <rect class="node n-pub" x="1180" y="70" width="124" height="68" rx="10"/>
-        <text class="t-name t-w" x="1242" y="96" text-anchor="middle">Published</text>
-        <text class="t-sub t-w" x="1242" y="113" text-anchor="middle">GitHub + DataTracker</text>
-        <rect class="node n-rej" x="768" y="200" width="104" height="48" rx="10"/>
-        <text class="t-name" x="820" y="221" text-anchor="middle">Rejected</text>
-        <text class="t-sub" x="820" y="237" text-anchor="middle">final</text>
-        <rect class="node n-inc" x="265" y="296" width="130" height="68" rx="10"/>
-        <text class="t-name" x="330" y="322" text-anchor="middle">Incubated</text>
-        <text class="t-sub" x="330" y="339" text-anchor="middle">incubation queue</text>
-        <text class="t-sub" x="330" y="354" text-anchor="middle">reviewed each meeting</text>
-        <polygon class="node dec" points="600,260 725,330 600,400 475,330"/>
-        <text class="t-name t-name-s" x="600" y="316" text-anchor="middle">Plenary: new WG</text>
-        <text class="t-name t-name-s" x="600" y="334" text-anchor="middle">or amended charter?</text>
-        <text class="t-sub" x="600" y="350" text-anchor="middle">on the incubation</text>
-        <text class="t-sub" x="600" y="364" text-anchor="middle">committee proposal</text>
-        <polygon class="node n-act" points="760,330 780,302 910,302 930,330 910,358 780,358"/>
-        <text class="t-name t-name-s" x="845" y="326" text-anchor="middle">WG formed or</text>
-        <text class="t-sub" x="845" y="343" text-anchor="middle">charter amended</text>
+        <text class="t-labm" x="470" y="414"
+          text-anchor="middle">stays in the queue</text>
+
+        <!-- Submitted -->
+        <rect class="node n-sub" x="20" y="70"
+          width="104" height="68" rx="10"/>
+        <text class="t-name" x="72" y="96"
+          text-anchor="middle">Submitted</text>
+        <text class="t-sub" x="72" y="113"
+          text-anchor="middle">TIDA DataTracker</text>
+        <text class="t-sub" x="72" y="128"
+          text-anchor="middle">before the deadline</text>
+
+        <!-- Plenary allocation -->
+        <polygon class="node dec"
+          points="330,34 445,104 330,174 215,104"/>
+        <text class="t-name t-name-s" x="330" y="90"
+          text-anchor="middle">Plenary: allocated to</text>
+        <text class="t-name t-name-s" x="330" y="108"
+          text-anchor="middle">an existing WG n?</text>
+        <text class="t-sub" x="330" y="124"
+          text-anchor="middle">on the incubation</text>
+        <text class="t-sub" x="330" y="138"
+          text-anchor="middle">committee proposal</text>
+
+        <!-- WG adoption -->
+        <polygon class="node dec"
+          points="820,59 890,104 820,149 750,104"/>
+        <text class="t-name t-name-s" x="820" y="100"
+          text-anchor="middle">WG n:</text>
+        <text class="t-name t-name-s" x="820" y="118"
+          text-anchor="middle">adopts?</text>
+
+        <!-- Under review -->
+        <rect class="node n-rev" x="960" y="70"
+          width="124" height="68" rx="10"/>
+        <text class="t-name" x="1022" y="96"
+          text-anchor="middle">Under review</text>
+        <text class="t-sub" x="1022" y="113"
+          text-anchor="middle">GitHub</text>
+        <text class="t-open" x="1022" y="129"
+          text-anchor="middle">contribute here</text>
+
+        <!-- Published -->
+        <rect class="node n-pub" x="1180" y="70"
+          width="124" height="68" rx="10"/>
+        <text class="t-name t-w" x="1242" y="96"
+          text-anchor="middle">Published</text>
+        <text class="t-sub t-w" x="1242" y="113"
+          text-anchor="middle">GitHub + DataTracker</text>
+
+        <!-- Rejected -->
+        <rect class="node n-rej" x="768" y="200"
+          width="104" height="48" rx="10"/>
+        <text class="t-name" x="820" y="221"
+          text-anchor="middle">Rejected</text>
+        <text class="t-sub" x="820" y="237"
+          text-anchor="middle">final</text>
+
+        <!-- Incubated -->
+        <rect class="node n-inc" x="265" y="296"
+          width="130" height="68" rx="10"/>
+        <text class="t-name" x="330" y="322"
+          text-anchor="middle">Incubated</text>
+        <text class="t-sub" x="330" y="339"
+          text-anchor="middle">incubation queue</text>
+        <text class="t-sub" x="330" y="354"
+          text-anchor="middle">reviewed each meeting</text>
+
+        <!-- Plenary charter decision -->
+        <polygon class="node dec"
+          points="600,260 725,330 600,400 475,330"/>
+        <text class="t-name t-name-s" x="600" y="316"
+          text-anchor="middle">Plenary: new WG</text>
+        <text class="t-name t-name-s" x="600" y="334"
+          text-anchor="middle">or amended charter?</text>
+        <text class="t-sub" x="600" y="350"
+          text-anchor="middle">on the incubation</text>
+        <text class="t-sub" x="600" y="364"
+          text-anchor="middle">committee proposal</text>
+
+        <!-- WG formed -->
+        <polygon class="node n-act"
+          points="760,330 780,302 910,302 930,330 910,358 780,358"/>
+        <text class="t-name t-name-s" x="845" y="326"
+          text-anchor="middle">WG formed or</text>
+        <text class="t-sub" x="845" y="343"
+          text-anchor="middle">charter amended</text>
       </svg>
-      </div>
-      <p class="hint">Scroll sideways to see the whole flow.</p>
-    </figure>
-    <h3 class="defs-title">Work Item States:</h3>
-    <dl class="defs">
-      <div><dt><span class="st sub">Submitted</span></dt><dd>Submitted to the TIDA DataTracker before the contribution deadline, with a declared target: a working group, or "no working group yet". It stays Submitted until the plenary decides where it goes and, if allocated to a working group, until that group decides on adoption.</dd></div>
-      <div><dt><span class="st inc">Incubated</span></dt><dd>In the incubation queue: valid for TIDA, but no working group can host it yet. The incubation committee reviews the queue before each meeting. It leaves the queue when a working group is formed or a charter is amended to host it. A work item that has stalled in the queue for more than six months, with no contribution and no activity, is rejected on the committee's report, unless the plenary decides otherwise.</dd></div>
-      <div><dt><span class="st rej">Rejected</span></dt><dd>Not adopted by the working group it was allocated to (the group states the reason), or stalled in the incubation queue for more than six months. Final: a new contribution is needed.</dd></div>
-
-      <div><dt><span class="st rev">Under review</span></dt><dd>Adopted by its working group. The repository exists in the working group's organisation; the group writes and reviews the work item, and every change arrives as a pull request.</dd></div>
-      <div><dt><span class="st pub">Published</span></dt><dd>The working group has approved the work item and the editors have published it. The work item is final.</dd></div>
-    </dl>
-    <h3 class="defs-title">Who decides what, and when</h3>
-    <table class="roles">
-      <tr><th>Contribution deadline</th><td><strong>By default 10 days before the meeting, unless agreed otherwise</strong> (the time schedule adopted by the Focus Group under A.7 clause 3.3). Contributions submitted after the deadline are taken at the next meeting.</td></tr>
-      <tr><th>Incubation committee</th><td>A small group designated by the Focus Group for each meeting: participants who know the procedure well, whether or not they hold a role in the Focus Group; working group chairs may join. Between the deadline and the meeting it reads every contribution and <strong>proposes</strong> a dispatch table: declared target, proposed target, one reason when the two differ. It keeps the incubation queue and reports its status before each meeting (what is in it, what clusters are forming, what could be reallocated, what has stalled for more than six months and is proposed for rejection), and convenes ad hoc groups to draft or amend charters. It does not judge content and it decides nothing.</td></tr>
-      <tr><th>Plenary, first day</th><td>Takes the dispatch table and the queue report in one of the first sessions (one hour at the first meeting, less afterwards). Decides immediately what can be decided: dispatch to existing working groups, reallocation out of the queue, creation of an ad hoc group to draft or amend a charter during the meeting.</td></tr>
-      <tr><th>Working groups, during the meeting</th><td>Decide adoption of the work items allocated to them. A work item not adopted is rejected; the group states the reason and the contributor may submit a new contribution.</td></tr>
-      <tr><th>Plenary, last day</th><td>Decides what was prepared during the meeting: new working groups, amended charters, reallocations from the queue. A charter that is not ready is agreed provisionally on the mailing list after the meeting and confirmed at the next plenary.</td></tr>
-      <tr><th>Reasons in the dispatch table</th><td><strong>T1</strong> no working group covers it yet · <strong>T2</strong> more than one working group could host it · <strong>T3</strong> another working group fits better: working groups overlap by nature and a contributor can pick the wrong one (for example a use case sent to a horizontal group) · <strong>T4</strong> outside the terms of reference or excluded under A.7: not dispatched, referred to the FG Co-Chairs and the SG17 Chair.</td></tr>
-    </table>
-    <p style="font-size:13.5px;color:var(--muted);margin-top:10px">This process is inspired by the incubation mechanism of FG-TIDA's parent group, ITU-T Study Group 17, published as the ITU-T Technical Paper <a href="https://www.itu.int/dms_pub/itu-t/opb/tut/T-TUT-ICTSS-2024-1-PDF-E.pdf">TP.inno, <em>Description of the incubation mechanism and ways to improve it</em> (03/2024)</a>. The mechanism has been modified and adapted to suit the agile nature of this Focus Group.</p>
-  </section>
-
-  <section class="start" aria-labelledby="hh">
-    <h2 id="hh">How to contribute</h2>
-    <div class="fork">
-      <a class="a" href="#existing">The work item already exists</a>
-      <a class="b" href="#new">I have a new work item</a>
     </div>
+    <p class="hint">Scroll sideways to see the whole flow.</p>
+  </figure>
+
+  <h3 class="defs-title">Work Item States:</h3>
+  <dl class="defs">
+    <div>
+      <dt><span class="st sub">Submitted</span></dt>
+      <dd>
+        Submitted to the TIDA DataTracker before the contribution deadline,
+        with a declared target: a working group, or "no working group yet".
+        It stays Submitted until the plenary decides where it goes and,
+        if allocated to a working group, until that group decides on adoption.
+      </dd>
+    </div>
+    <div>
+      <dt><span class="st inc">Incubated</span></dt>
+      <dd>
+        In the incubation queue: valid for TIDA, but no working group
+        can host it yet. The incubation committee reviews the queue before
+        each meeting. It leaves the queue when a working group is formed
+        or a charter is amended to host it. A work item that has stalled
+        in the queue for more than six months, with no contribution and
+        no activity, is rejected on the committee's report, unless the
+        plenary decides otherwise.
+      </dd>
+    </div>
+    <div>
+      <dt><span class="st rej">Rejected</span></dt>
+      <dd>
+        Not adopted by the working group it was allocated to (the group
+        states the reason), or stalled in the incubation queue for more
+        than six months. Final: a new contribution is needed.
+      </dd>
+    </div>
+    <div>
+      <dt><span class="st rev">Under review</span></dt>
+      <dd>
+        Adopted by its working group. The repository exists in the working
+        group's organisation; the group writes and reviews the work item,
+        and every change arrives as a pull request.
+      </dd>
+    </div>
+    <div>
+      <dt><span class="st pub">Published</span></dt>
+      <dd>
+        The working group has approved the work item and the editors have
+        published it. The work item is final.
+      </dd>
+    </div>
+  </dl>
+
+  <h3 class="defs-title">Who decides what, and when</h3>
+  <table class="roles">
+    <tr>
+      <th>Contribution deadline</th>
+      <td>
+        <strong>By default 10 days before the meeting, unless agreed
+        otherwise</strong> (the time schedule adopted by the Focus Group
+        under A.7 clause 3.3). Contributions submitted after the deadline
+        are taken at the next meeting.
+      </td>
+    </tr>
+    <tr>
+      <th>Incubation committee</th>
+      <td>
+        A small group designated by the Focus Group for each meeting:
+        participants who know the procedure well, whether or not they hold
+        a role in the Focus Group; working group chairs may join.
+        Between the deadline and the meeting it reads every contribution
+        and <strong>proposes</strong> a dispatch table: declared target,
+        proposed target, one reason when the two differ. It keeps the
+        incubation queue and reports its status before each meeting
+        (what is in it, what clusters are forming, what could be
+        reallocated, what has stalled for more than six months and is
+        proposed for rejection), and convenes ad hoc groups to draft or
+        amend charters. It does not judge content and it decides nothing.
+      </td>
+    </tr>
+    <tr>
+      <th>Plenary, first day</th>
+      <td>
+        Takes the dispatch table and the queue report in one of the first
+        sessions (one hour at the first meeting, less afterwards).
+        Decides immediately what can be decided: dispatch to existing
+        working groups, reallocation out of the queue, creation of an ad
+        hoc group to draft or amend a charter during the meeting.
+      </td>
+    </tr>
+    <tr>
+      <th>Working groups, during the meeting</th>
+      <td>
+        Decide adoption of the work items allocated to them. A work item
+        not adopted is rejected; the group states the reason and the
+        contributor may submit a new contribution.
+      </td>
+    </tr>
+    <tr>
+      <th>Plenary, last day</th>
+      <td>
+        Decides what was prepared during the meeting: new working groups,
+        amended charters, reallocations from the queue. A charter that is
+        not ready is agreed provisionally on the mailing list after the
+        meeting and confirmed at the next plenary.
+      </td>
+    </tr>
+    <tr>
+      <th>Reasons in the dispatch table</th>
+      <td>
+        <strong>T1</strong> no working group covers it yet ·
+        <strong>T2</strong> more than one working group could host it ·
+        <strong>T3</strong> another working group fits better: working groups
+        overlap by nature and a contributor can pick the wrong one (for
+        example a use case sent to a horizontal group) ·
+        <strong>T4</strong> outside the terms of reference or excluded
+        under A.7: not dispatched, referred to the FG Co-Chairs and the
+        SG17 Chair.
+      </td>
+    </tr>
+  </table>
+
+  <p style="font-size:13.5px;color:var(--muted);margin-top:10px">
+    This process is inspired by the incubation mechanism of FG-TIDA's
+    parent group, ITU-T Study Group 17, published as the ITU-T Technical
+    Paper
+    <a href="https://www.itu.int/dms_pub/itu-t/opb/tut/T-TUT-ICTSS-2024-1-PDF-E.pdf">
+      TP.inno, <em>Description of the incubation mechanism and ways to
+      improve it</em> (03/2024)
+    </a>.
+    The mechanism has been modified and adapted to suit the agile nature
+    of this Focus Group.
+  </p>
+</section>
+
+<section class="start" aria-labelledby="hh">
+  <h2 id="hh">How to contribute</h2>
+  <div class="fork">
+    <a class="a" href="#existing">The work item already exists</a>
+    <a class="b" href="#new">I have a new work item</a>
+  </div>
 
   <div class="paths">
 
-    <!-- PATH A -->
+    <!-- PATH A: EXISTING WORK ITEM -->
     <section class="path a" id="existing" aria-labelledby="ha">
       <div class="path-head">
         <h3 id="ha">Contribute to an existing work item</h3>
-        <p>The work item lives in its working group's GitHub organisation. You propose changes; the working group decides. Please, before proceeding, make sure you have GitHub account created.</p>
-        <div class="states">Applies while the work item is <span class="st rev">Under review</span></div>
+        <p>
+          The work item lives in its working group's GitHub organisation.
+          You propose changes; the working group decides. Please, before
+          proceeding, make sure you have GitHub account created.
+        </p>
+        <div class="states">
+          Applies while the work item is
+          <span class="st rev">Under review</span>
+        </div>
       </div>
+
       <ol class="steps">
         <li class="step">
           <div class="num">1</div>
           <div class="card">
-            <div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span></div>
+            <div class="tags">
+              <span class="tag"><i class="dot gh"></i>GitHub</span>
+            </div>
             <h3>Find the work item</h3>
-            <p>Open your working group's GitHub page, for example <code>github.com/fg-tida-wg2</code>. Its table of deliverables links each work item's published site, PDF and repository (<code>wg&lt;n&gt;-&lt;acronym&gt;-&lt;name&gt;</code>). The chairs and mailing list are listed there too.</p>
+            <p>
+              Open your working group's GitHub page, for example
+              <code>github.com/fg-tida-wg2</code>. Its table of deliverables
+              links each work item's published site, PDF and repository
+              (<code>wg&lt;n&gt;-&lt;acronym&gt;-&lt;name&gt;</code>).
+              The chairs and mailing list are listed there too.
+            </p>
           </div>
         </li>
+
         <li class="step">
           <div class="num">2</div>
           <div class="card decide">
             <h3>What do you want to do?</h3>
             <div class="opts">
+
               <div class="opt">
                 <div class="if">Change the text</div>
                 <h4>Open a pull request</h4>
                 <ol>
-                  <li>In the browser: open a file under <code>src/doc/</code>, click the pencil, choose <strong>Propose changes</strong>.</li>
-                  <li>Or with Git: branch, edit, push, then open a PR against <code>main</code>.</li>
+                  <li>
+                    In the browser: open a file under
+                    <code>src/doc/</code>, click the pencil,
+                    choose <strong>Propose changes</strong>.
+                  </li>
+                  <li>
+                    Or with Git: branch, edit, push, then open
+                    a PR against <code>main</code>.
+                  </li>
                 </ol>
-                <p style="margin-top:6px"><strong>You cannot push to <code>main</code> directly (it is protected).</strong></p>
+                <p style="margin-top:6px">
+                  <strong>You cannot push to <code>main</code> directly
+                  (it is protected).</strong>
+                </p>
               </div>
+
               <div class="opt">
                 <div class="if">Report a problem or ask a question</div>
                 <h4>Open an issue</h4>
-                <p>A clear title and a short description of what is wrong and where is enough to start.</p>
+                <p>
+                  A clear title and a short description of what is wrong
+                  and where is enough to start.
+                </p>
               </div>
+
               <div class="opt">
                 <div class="if">Discuss direction or larger questions</div>
                 <h4>Write to the mailing list</h4>
-                <p>Before drafting anything substantial, discuss your idea with the working group through the mailing list linked on its WG page.</p>
-                <p><strong>To subscribe:</strong> Create a free ITU user account if you do not already have one, then sign in and open the <a href="https://www.itu.int/net4/iwm?p0=0&amp;p11=ITU-SEP-ITU-T&amp;p12=ITU-SEP-ITU-T-SEP-Other%20Groups-SEP-fgtida&amp;p21=ITU&amp;p22=ITU" target="_blank" rel="noopener noreferrer">FG-TIDA mailing-list subscription page</a>. Follow the on-screen instructions to subscribe. Once subscribed, use the mailing-list address linked on your WG page to share your question or proposal with the group.</p>
+                <p>
+                  Before drafting anything substantial, discuss your idea
+                  with the working group through the mailing list linked
+                  on its WG page.
+                </p>
+                <p>
+                  <strong>To subscribe:</strong> Create a free ITU user
+                  account if you do not already have one, then sign in
+                  and open the
+                  <a href="https://www.itu.int/net4/iwm?p0=0&amp;p11=ITU-SEP-ITU-T&amp;p12=ITU-SEP-ITU-T-SEP-Other%20Groups-SEP-fgtida&amp;p21=ITU&amp;p22=ITU"
+                    target="_blank" rel="noopener noreferrer">
+                    FG-TIDA mailing-list subscription page
+                  </a>.
+                  Follow the on-screen instructions to subscribe.
+                  Once subscribed, use the mailing-list address linked
+                  on your WG page to share your question or proposal
+                  with the group.
+                </p>
               </div>
             </div>
           </div>
         </li>
+
         <li class="step">
           <div class="num">3</div>
           <div class="card">
-            <div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span></div>
+            <div class="tags">
+              <span class="tag"><i class="dot gh"></i>GitHub</span>
+            </div>
             <h3>The working group reviews</h3>
-            <p>Every pull request is reviewed by the working group before it is merged, so each change keeps a review and decision history.</p>
+            <p>
+              Every pull request is reviewed by the working group before
+              it is merged, so each change keeps a review and decision
+              history.
+            </p>
           </div>
         </li>
+
         <li class="step">
           <div class="num">4</div>
           <div class="card">
-            <div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span><span class="tag"><i class="dot tr"></i>TIDA DataTracker</span></div>
+            <div class="tags">
+              <span class="tag"><i class="dot gh"></i>GitHub</span>
+              <span class="tag"><i class="dot tr"></i>TIDA DataTracker</span>
+            </div>
             <h3>Merged into <code>main</code></h3>
-            <p>Each push to <code>main</code> rebuilds the HTML site and PDF and publishes them to GitHub Pages. The same build is sent to the TIDA DataTracker, which always holds the latest working copy of the work item.</p>
+            <p>
+              Each push to <code>main</code> rebuilds the HTML site and
+              PDF and publishes them to GitHub Pages. The same build is
+              sent to the TIDA DataTracker, which always holds the latest
+              working copy of the work item.
+            </p>
           </div>
         </li>
+
         <li class="step">
           <div class="num">5</div>
           <div class="card">
-            <div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span><span class="tag"><i class="dot tr"></i>TIDA DataTracker</span></div>
-            <h3>Release: tag <code>vX.Y</code> becomes revision X.Y</h3>
-            <p>When the editors tag a release, HTML site, the PDF, source archive and a manifest go to the TIDA DataTracker, which records revision <strong>X.Y</strong> of the work item.</p>
-            <p>Merges between releases update the working copy only. They do not create a revision.</p>
+            <div class="tags">
+              <span class="tag"><i class="dot gh"></i>GitHub</span>
+              <span class="tag"><i class="dot tr"></i>TIDA DataTracker</span>
+            </div>
+            <h3>
+              Release: tag <code>vX.Y</code> becomes revision X.Y
+            </h3>
+            <p>
+              When the editors tag a release, HTML site, the PDF,
+              source archive and a manifest go to the TIDA DataTracker,
+              which records revision <strong>X.Y</strong> of the work item.
+            </p>
+            <p>
+              Merges between releases update the working copy only.
+              They do not create a revision.
+            </p>
           </div>
         </li>
       </ol>
     </section>
 
-    <!-- PATH B -->
+    <!-- PATH B: NEW WORK ITEM -->
     <section class="path b" id="new" aria-labelledby="hb">
       <div class="path-head">
         <h3 id="hb">Submit a new work item</h3>
-        <p>Prepare a complete source contribution from the common template, then submit it through GitHub or a ZIP upload. A Word fallback is available when technical assistance is needed. The TIDA DataTracker is the official record.</p>
-        <div class="states">Takes a work item from <span class="st sub">Submitted</span> to <span class="st rev">Under review</span>, directly or through the <span class="st inc">Incubated</span> queue</div>
+        <p>
+          Prepare a complete source contribution from the common template,
+          then submit it through GitHub or a ZIP upload. A Word fallback
+          is available when technical assistance is needed. The TIDA
+          DataTracker is the official record.
+        </p>
+        <div class="states">
+          Takes a work item from
+          <span class="st sub">Submitted</span>
+          to <span class="st rev">Under review</span>,
+          directly or through the
+          <span class="st inc">Incubated</span> queue
+        </div>
       </div>
+
       <ol class="steps">
-                <li class="step">
+        <li class="step">
           <div class="num">1</div>
           <div class="card">
-            <div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span></div>
+            <div class="tags">
+              <span class="tag"><i class="dot gh"></i>GitHub</span>
+            </div>
+
             <h3>Prepare your contribution using the common template</h3>
-            <p>Start with the <a href="https://github.com/FG-TIDA/spec-template">FG-TIDA specification template</a>. Include a title, abstract, authors, proposed scope and technical content. Keep the RST chapters, images, diagrams and references together, using relative paths so the contribution can be read and built independently.</p>
+            <p>
+              Start with the
+              <a href="https://github.com/FG-TIDA/spec-template">
+                FG-TIDA specification template
+              </a>.
+              Include a title, abstract, authors, proposed scope and
+              technical content. Keep the RST chapters, images, diagrams
+              and references together, using relative paths so the
+              contribution can be read and built independently.
+            </p>
+
             <h4 class="qh">Choose one of two source submission routes</h4>
+
             <div class="opts submission-options">
               <div class="opt">
                 <div class="if">Recommended for GitHub users</div>
                 <h4>Option 1 · GitHub repository</h4>
                 <ol>
-                  <li>You need <strong>your own GitHub account</strong> for this method. If you do not have one, <a href="https://github.com/signup">create a GitHub account</a>, then sign in.</li>
-                  <li>Open the <a href="https://github.com/FG-TIDA/spec-template">specification template</a> and select <strong>Use this template → Create a new repository</strong>. Set <strong>Owner</strong> to your own GitHub username, choose a repository name and select <strong>Public</strong>. Create the repository in <strong>your personal account</strong>; this is your draft workspace.</li>
-                  <li>In your new repository, edit the <code>.rst</code> files: these are the text files containing your chapters. Replace the template examples with your contribution. Add every image, diagram and reference file that your text uses. Keep editable diagram sources when available.</li>
-                  <li>Follow the build instructions in the template's CONTRIBUTING.md (sections 2 and 3) to generate the reading version. Review the HTML or PDF and resolve missing images and build errors before submitting.</li>
-                  <li>Save your completed changes as a <strong>commit</strong> in your repository. A commit records an exact version of your files. Open that commit in GitHub and copy its <strong>full SHA</strong> (the long identifier), not just the branch name. Keep it for the submission form below.</li>
+                  <li>
+                    You need <strong>your own GitHub account</strong>
+                    for this method. If you do not have one,
+                    <a href="https://github.com/signup">
+                      create a GitHub account
+                    </a>, then sign in.
+                  </li>
+                  <li>
+                    Open the
+                    <a href="https://github.com/FG-TIDA/spec-template">
+                      specification template
+                    </a>
+                    and select <strong>Use this template → Create a new
+                    repository</strong>. Set <strong>Owner</strong>
+                    to your own GitHub username, choose a repository
+                    name and select <strong>Public</strong>.
+                    Create the repository in <strong>your personal
+                    account</strong>; this is your draft workspace.
+                  </li>
+                  <li>
+                    In your new repository, edit the <code>.rst</code>
+                    files: these are the text files containing your
+                    chapters. Replace the template examples with your
+                    contribution. Add every image, diagram and reference
+                    file that your text uses. Keep editable diagram
+                    sources when available.
+                  </li>
+                  <li>
+                    Follow the build instructions in the template's
+                    CONTRIBUTING.md (sections 2 and 3) to generate
+                    the reading version. Review the HTML or PDF and
+                    resolve missing images and build errors before
+                    submitting.
+                  </li>
+                  <li>
+                    Save your completed changes as a
+                    <strong>commit</strong> in your repository. A commit
+                    records an exact version of your files. Open that
+                    commit in GitHub and copy its
+                    <strong>full SHA</strong> (the long identifier),
+                    not just the branch name. Keep it for the
+                    submission form below.
+                  </li>
                 </ol>
-                <p style="margin-top:8px">You do not need permission to create repositories in the target WG organisation. The official WG repository is established after adoption.</p>
+                <p style="margin-top:8px">
+                  You do not need permission to create repositories in the
+                  target WG organisation. The official WG repository is
+                  established after adoption.
+                </p>
               </div>
+
               <div class="opt">
                 <div class="if">No GitHub account required</div>
                 <h4>Option 2 · Direct ZIP upload</h4>
                 <ol>
-                  <li>Open the same <a href="https://github.com/FG-TIDA/spec-template">template repository</a> and choose <strong>Code → Download ZIP</strong>.</li>
-                  <li>Unzip the downloaded file on your computer. Open the <code>.rst</code> files in a text editor and replace the template examples with your contribution. Keep the folders in their original arrangement and add every image, diagram and reference file used by your text.</li>
-                  <li>Keep the template's configuration and requirements files: these describe how to generate the document. Do not include passwords, access tokens, installed software folders or generated build output.</li>
-                  <li>Follow the build instructions in CONTRIBUTING.md (sections 2 and 3) to check your document if possible. Then compress the completed template folder into <strong>one .zip file</strong>. Upload this edited ZIP, not the original template download. Note the path to the main RST file, normally <code>src/doc/index.rst</code>; this is the entry document.</li>
+                  <li>
+                    Open the same
+                    <a href="https://github.com/FG-TIDA/spec-template">
+                      template repository
+                    </a>
+                    and choose <strong>Code → Download ZIP</strong>.
+                  </li>
+                  <li>
+                    Unzip the downloaded file on your computer.
+                    Open the <code>.rst</code> files in a text editor
+                    and replace the template examples with your
+                    contribution. Keep the folders in their original
+                    arrangement and add every image, diagram and
+                    reference file used by your text.
+                  </li>
+                  <li>
+                    Keep the template's configuration and requirements
+                    files: these describe how to generate the document.
+                    Do not include passwords, access tokens, installed
+                    software folders or generated build output.
+                  </li>
+                  <li>
+                    Follow the build instructions in CONTRIBUTING.md
+                    (sections 2 and 3) to check your document if
+                    possible. Then compress the completed template
+                    folder into <strong>one .zip file</strong>.
+                    Upload this edited ZIP, not the original template
+                    download. Note the path to the main RST file,
+                    normally <code>src/doc/index.rst</code>;
+                    this is the entry document.
+                  </li>
                 </ol>
-                <p style="margin-top:8px">You work on your computer and upload the ZIP to the DataTracker; you do not need to create a GitHub account or repository. Include the image and diagram files themselves, not just links to them. Keep their paths relative to the document, for example <code>images/architecture.png</code>, rather than a path on your computer.</p>
+                <p style="margin-top:8px">
+                  You work on your computer and upload the ZIP to the
+                  DataTracker; you do not need to create a GitHub account
+                  or repository. Include the image and diagram files
+                  themselves, not just links to them. Keep their paths
+                  relative to the document, for example
+                  <code>images/architecture.png</code>, rather than
+                  a path on your computer.
+                </p>
               </div>
             </div>
+
             <details class="word-fallback">
-              <summary>Exceptional fallback: Word (.docx) — discouraged</summary>
-              <p>Use this exceptional route only if you cannot prepare an RST contribution, even using the ZIP method. Write your contribution in Word and save it as <strong>.docx</strong>. You do not need a GitHub account or any knowledge of RST. You will upload the Word file directly to the DataTracker and request conversion assistance.</p>
-              <p>Use clear heading levels and include the title, abstract, authors, scope, references, captions and embedded figures. Supply original images and editable diagrams as supporting files where available, and briefly explain that you need help converting the document.</p>
-              <p>Word is an accessibility fallback, not the normal standards source format. Editors coordinate conversion to the common RST template, and the contributor checks that the converted text, figures and references are faithful. The original submission remains archived; the verified RST becomes the maintained source.</p>
+              <summary>
+                Exceptional fallback: Word (.docx) — discouraged
+              </summary>
+              <p>
+                Use this exceptional route only if you cannot prepare
+                an RST contribution, even using the ZIP method. Write
+                your contribution in Word and save it as
+                <strong>.docx</strong>. You do not need a GitHub account
+                or any knowledge of RST. You will upload the Word file
+                directly to the DataTracker and request conversion assistance.
+              </p>
+              <p>
+                Use clear heading levels and include the title, abstract,
+                authors, scope, references, captions and embedded figures.
+                Supply original images and editable diagrams as supporting
+                files where available, and briefly explain that you need
+                help converting the document.
+              </p>
+              <p>
+                Word is an accessibility fallback, not the normal standards
+                source format. Editors coordinate conversion to the common
+                RST template, and the contributor checks that the converted
+                text, figures and references are faithful. The original
+                submission remains archived; the verified RST becomes
+                the maintained source.
+              </p>
             </details>
           </div>
         </li>
+
         <li class="step">
           <div class="num">2</div>
           <div class="card">
-            <div class="tags"><span class="tag"><i class="dot tr"></i>TIDA DataTracker</span><span class="st sub">Submitted</span></div>
-            <h3>Submit the complete contribution in the TIDA DataTracker</h3>
-            <p><strong>All three routes require a TIDA DataTracker account.</strong> If you do not have one, register and complete the account confirmation, then sign in. A GitHub account does not replace this account. Submit <strong>before the contribution deadline shown for the meeting</strong> (the proposed default is 10 days before the meeting). Under <strong>Documents → Submit a contribution</strong>, enter the title, abstract, authors and target: a working group or <strong>No working group yet</strong>. Choose the submission method that matches what you prepared above.</p>
+            <div class="tags">
+              <span class="tag">
+                <i class="dot tr"></i>TIDA DataTracker
+              </span>
+              <span class="st sub">Submitted</span>
+            </div>
+
+            <h3>
+              Submit the complete contribution in the TIDA DataTracker
+            </h3>
+            <p>
+              <strong>All three routes require a TIDA DataTracker
+              account.</strong> If you do not have one, register and
+              complete the account confirmation, then sign in. A GitHub
+              account does not replace this account. Submit
+              <strong>before the contribution deadline shown for the
+              meeting</strong> (the proposed default is 10 days before
+              the meeting). Under <strong>Documents → Submit a
+              contribution</strong>, enter the title, abstract, authors
+              and target: a working group or
+              <strong>No working group yet</strong>. Choose the
+              submission method that matches what you prepared above.
+            </p>
+
             <div class="opts submission-options">
               <div class="opt">
                 <h4>Submit from GitHub</h4>
-                <p>Select <strong>GitHub repository</strong> and enter the details of <strong>your completed repository in your own account</strong>, not the template repository:
-                </p><ol>
-                  <li><strong>Repository URL:</strong> for example, <code>https://github.com/YOUR-USERNAME/YOUR-REPOSITORY</code>.</li>
-                  <li><strong>Source folder:</strong> the folder containing your documentation, normally <code>src/doc</code>.</li>
-                  <li><strong>Entry document:</strong> the main RST file, given as a path from the repository root, normally <code>src/doc/index.rst</code>.</li>
-                  <li><strong>Commit SHA:</strong> paste the full identifier of the completed version you want the WG to review.</li>
-                </ol><p style="margin-top:8px">Use the actual paths in your repository if they differ from these examples. Keep every referenced asset inside the source folder. A link to <code>main</code> is not an exact version. You do not need to upload a ZIP as well.</p>
-                <p style="margin-top:8px">The DataTracker validates the selected source and preserves a snapshot of that commit's contribution files and assets, together with their provenance. Later changes in your repository do not alter this submission; submit a new revision deliberately.</p>
+                <p>
+                  Select <strong>GitHub repository</strong> and enter
+                  the details of <strong>your completed repository in
+                  your own account</strong>, not the template repository:
+                </p>
+                <ol>
+                  <li>
+                    <strong>Repository URL:</strong> for example,
+                    <code>https://github.com/YOUR-USERNAME/YOUR-REPOSITORY</code>.
+                  </li>
+                  <li>
+                    <strong>Source folder:</strong> the folder containing
+                    your documentation, normally <code>src/doc</code>.
+                  </li>
+                  <li>
+                    <strong>Entry document:</strong> the main RST file,
+                    given as a path from the repository root, normally
+                    <code>src/doc/index.rst</code>.
+                  </li>
+                  <li>
+                    <strong>Commit SHA:</strong> paste the full identifier
+                    of the completed version you want the WG to review.
+                  </li>
+                </ol>
+                <p style="margin-top:8px">
+                  Use the actual paths in your repository if they differ
+                  from these examples. Keep every referenced asset inside
+                  the source folder. A link to <code>main</code> is not
+                  an exact version. You do not need to upload a ZIP as well.
+                </p>
+                <p style="margin-top:8px">
+                  The DataTracker validates the selected source and preserves
+                  a snapshot of that commit's contribution files and assets,
+                  together with their provenance. Later changes in your
+                  repository do not alter this submission; submit a new
+                  revision deliberately.
+                </p>
               </div>
+
               <div class="opt">
                 <h4>Submit a ZIP package</h4>
-                <p>Select <strong>RST source package (.zip)</strong>, choose the completed ZIP from your computer and upload it. Enter the path to the main RST file inside the ZIP, including any enclosing folder, for example <code>my-contribution/src/doc/index.rst</code>. No GitHub account, repository URL or commit SHA is required.</p>
-                <p style="margin-top:8px">The DataTracker checks the package structure and referenced assets, preserves the original ZIP and records the source snapshot for this revision.</p>
+                <p>
+                  Select <strong>RST source package (.zip)</strong>,
+                  choose the completed ZIP from your computer and upload it.
+                  Enter the path to the main RST file inside the ZIP,
+                  including any enclosing folder, for example
+                  <code>my-contribution/src/doc/index.rst</code>.
+                  No GitHub account, repository URL or commit SHA is required.
+                </p>
+                <p style="margin-top:8px">
+                  The DataTracker checks the package structure and referenced
+                  assets, preserves the original ZIP and records the source
+                  snapshot for this revision.
+                </p>
               </div>
             </div>
-            <p style="margin-top:12px">For the exceptional Word route, select <strong>Word (.docx) — request conversion assistance</strong>, upload the document and any supporting assets, and explain the assistance needed. The submission is marked as needing source conversion; using Word does not bypass review or imply adoption.</p>
-            <p>For RST submissions, validation and the documentation build provide a reading preview. Resolve reported errors before confirming. Preview the title, authors, target and files: <strong>the confirmed contribution is public</strong>. The DataTracker then assigns a contribution identifier and archives the submitted revision with status <strong>Submitted</strong>. A repository link alone does not enable synchronisation.</p>
+
+            <p style="margin-top:12px">
+              For the exceptional Word route, select
+              <strong>Word (.docx) — request conversion assistance</strong>,
+              upload the document and any supporting assets, and explain
+              the assistance needed. The submission is marked as needing
+              source conversion; using Word does not bypass review or
+              imply adoption.
+            </p>
+            <p>
+              For RST submissions, validation and the documentation build
+              provide a reading preview. Resolve reported errors before
+              confirming. Preview the title, authors, target and files:
+              <strong>the confirmed contribution is public</strong>.
+              The DataTracker then assigns a contribution identifier and
+              archives the submitted revision with status
+              <strong>Submitted</strong>. A repository link alone
+              does not enable synchronisation.
+            </p>
+
             <h4 class="qh">Where do you think it belongs?</h4>
             <div class="opts">
               <div class="opt">
                 <div class="if">It fits an existing working group</div>
                 <h4>Declare that working group</h4>
-                <p>Pick the group in the submission form. Today: <strong>WG0</strong> Use Cases and Terminology, <strong>WG1</strong> Continuous and Dynamic Remote Attestation for Agentic AI (CDRA), <strong>WG2</strong> Identity, Behaviour and Enforcement for AI Agents (IBEA). Groups overlap by nature: if you hesitate, say so in the abstract.</p>
+                <p>
+                  Pick the group in the submission form. Today:
+                  <strong>WG0</strong> Use Cases and Terminology,
+                  <strong>WG1</strong> Continuous and Dynamic Remote
+                  Attestation for Agentic AI (CDRA),
+                  <strong>WG2</strong> Identity, Behaviour and Enforcement
+                  for AI Agents (IBEA). Groups overlap by nature:
+                  if you hesitate, say so in the abstract.
+                </p>
               </div>
               <div class="opt">
                 <div class="if">No working group covers it yet</div>
                 <h4>Declare "no working group yet"</h4>
-                <p>Pick <strong>No working group yet</strong> in the form. Say in the abstract whether you see it as a new group or as an extension of an existing charter.</p>
+                <p>
+                  Pick <strong>No working group yet</strong> in the form.
+                  Say in the abstract whether you see it as a new group
+                  or as an extension of an existing charter.
+                </p>
               </div>
             </div>
-            <p style="margin-top:12px">The work item is <strong>Submitted</strong> straight away.</p>
+            <p style="margin-top:12px">
+              The work item is <strong>Submitted</strong> straight away.
+            </p>
           </div>
         </li>
+
         <li class="step">
           <div class="num">3</div>
           <div class="card decide">
-            <div class="tags"><span class="tag"><i class="dot tr"></i>TIDA DataTracker</span><span class="tag"><i class="dot ml"></i>Mailing list</span><span class="st sub">Submitted</span></div>
+            <div class="tags">
+              <span class="tag">
+                <i class="dot tr"></i>TIDA DataTracker
+              </span>
+              <span class="tag">
+                <i class="dot ml"></i>Mailing list
+              </span>
+              <span class="st sub">Submitted</span>
+            </div>
             <h3>The plenary decides where it goes</h3>
-            <p>Between the deadline and the meeting, the incubation committee reads every contribution and publishes a dispatch table. In one of the first sessions of the meeting, the plenary decides. The work item stays Submitted until then.</p>
+            <p>
+              Between the deadline and the meeting, the incubation
+              committee reads every contribution and publishes a
+              dispatch table. In one of the first sessions of the meeting,
+              the plenary decides. The work item stays Submitted until then.
+            </p>
+
             <div class="opts">
               <div class="opt">
                 <div class="if">A working group can host it</div>
                 <h4>Allocated to that working group</h4>
-                <p>The working group, which may differ from the one you declared, decides adoption during the meeting. The work item stays <span class="st sub">Submitted</span> until then.</p>
-                <p style="margin-top:6px"><span class="st rev">Under review</span> if it adopts. <span class="st rej">Rejected</span> if it does not: the group states the reason, and you may come back with a new contribution.</p>
+                <p>
+                  The working group, which may differ from the one you
+                  declared, decides adoption during the meeting.
+                  The work item stays <span class="st sub">Submitted</span>
+                  until then.
+                </p>
+                <p style="margin-top:6px">
+                  <span class="st rev">Under review</span> if it adopts.
+                  <span class="st rej">Rejected</span> if it does not:
+                  the group states the reason, and you may come back
+                  with a new contribution.
+                </p>
               </div>
+
               <div class="opt">
                 <div class="if">No working group can host it yet</div>
                 <h4>Incubated</h4>
-                <p><span class="st inc">Incubated</span>: the work item waits in the incubation queue. The incubation committee reviews the queue before each meeting; when enough work items cluster, an ad hoc group drafts a new charter from <code>wg-charter-template</code> (<code>wg&lt;n&gt;-&lt;acronym&gt;-charter</code>) or amends an existing one, and the plenary decides. The work item is then allocated to that group and goes <span class="st rev">Under review</span> in it. A work item that stalls in the queue for more than six months, with no contribution and no activity, is <span class="st rej">Rejected</span>: the queue is a waiting room, not a shelf.</p>
+                <p>
+                  <span class="st inc">Incubated</span>: the work item waits
+                  in the incubation queue. The incubation committee reviews
+                  the queue before each meeting; when enough work items
+                  cluster, an ad hoc group drafts a new charter from
+                  <code>wg-charter-template</code>
+                  (<code>wg&lt;n&gt;-&lt;acronym&gt;-charter</code>)
+                  or amends an existing one, and the plenary decides.
+                  The work item is then allocated to that group and goes
+                  <span class="st rev">Under review</span> in it.
+                  A work item that stalls in the queue for more than six
+                  months, with no contribution and no activity, is
+                  <span class="st rej">Rejected</span>: the queue is a
+                  waiting room, not a shelf.
+                </p>
               </div>
             </div>
-            <p style="margin-top:12px">A contribution outside the FG-TIDA terms of reference, or excluded under A.7 because the subject is already handled elsewhere, is not dispatched: the FG Co-Chairs and the SG17 Chair resolve it with the contributor before the meeting, and the work item is removed from the DataTracker or resubmitted within scope.</p>
+            <p style="margin-top:12px">
+              A contribution outside the FG-TIDA terms of reference,
+              or excluded under A.7 because the subject is already handled
+              elsewhere, is not dispatched: the FG Co-Chairs and the SG17
+              Chair resolve it with the contributor before the meeting,
+              and the work item is removed from the DataTracker or
+              resubmitted within scope.
+            </p>
           </div>
         </li>
+
         <li class="step">
           <div class="num">4</div>
           <div class="card">
-            <div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span><span class="tag"><i class="dot tr"></i>TIDA DataTracker</span><span class="st rev">Under review</span></div>
-            <h3>Establish the official repository in the adopting WG organisation</h3>
-            <p>On adoption, editors establish the official repository inside the <strong>adopting working group's GitHub organisation</strong>, using the common template and the name <code>wg&lt;n&gt;-&lt;acronym&gt;-&lt;name&gt;</code>. For example, a WG1 work item belongs in <code>fg-tida-wg1</code>. The declared target may have changed during allocation; the adopting WG determines ownership.</p>
-            <p>For a GitHub submission, WG editors import the reviewed source snapshot and all its assets from the recorded commit in your personal repository. For a ZIP submission, WG editors import the reviewed package; you do not have to create the official repository yourself. For a Word submission, editors arrange conversion to RST and contributor verification before establishing the maintained source. The repository must contain the actual contribution, not just an empty template.</p><details class="word-fallback" style="border-color:var(--line)"><summary style="color:var(--ink)">Editors: import a GitHub submission with its history</summary><p>Use the commit recorded in the TIDA DataTracker, never <code>main</code>. Create an <strong>empty</strong> repository named <code>wg&lt;n&gt;-&lt;acronym&gt;-&lt;name&gt;</code> in the working group organisation (no README, no template files), then run:</p><p><code>git clone https://github.com/PROPOSER/REPO.git wg-import</code><br><code>cd wg-import</code><br><code>git checkout -b main FULL-SHA</code><br><code>git remote add wg https://github.com/fg-tida-wg&lt;n&gt;/wg&lt;n&gt;-&lt;acronym&gt;-&lt;name&gt;.git</code><br><code>git push wg main</code></p><p>This keeps the proposer's history and authorship up to the reviewed commit and leaves out any later changes. Then set <strong>Settings → Pages → Source: GitHub Actions</strong>, protect <code>main</code>, assign maintainers and link the repository to the same DataTracker record. For a ZIP submission, create the repository from the template, unzip the package into it and commit with the proposer as author.</p></details>
-            <p>Editors assign maintainers, check the build and configure the approved publishing integration. The DataTracker links the official repository to the <strong>same contribution record</strong>, retaining the original submission, its provenance and the adoption decision.</p>
-            <p>Subsequent changes use pull requests in the official WG repository. Successful main-branch builds update the working copy; formal releases archive numbered revisions with their source and assets. Builds and repository creation do not themselves approve or publish the work item.</p>
+            <div class="tags">
+              <span class="tag"><i class="dot gh"></i>GitHub</span>
+              <span class="tag"><i class="dot tr"></i>TIDA DataTracker</span>
+              <span class="st rev">Under review</span>
+            </div>
+            <h3>
+              Establish the official repository in the adopting
+              WG organisation
+            </h3>
+            <p>
+              On adoption, editors establish the official repository
+              inside the <strong>adopting working group's GitHub
+              organisation</strong>, using the common template and
+              the name <code>wg&lt;n&gt;-&lt;acronym&gt;-&lt;name&gt;</code>.
+              For example, a WG1 work item belongs in
+              <code>fg-tida-wg1</code>. The declared target may have
+              changed during allocation; the adopting WG determines
+              ownership.
+            </p>
+            <p>
+              For a GitHub submission, WG editors import the reviewed
+              source snapshot and all its assets from the recorded commit
+              in your personal repository. For a ZIP submission, WG
+              editors import the reviewed package; you do not have to
+              create the official repository yourself. For a Word
+              submission, editors arrange conversion to RST and
+              contributor verification before establishing the maintained
+              source. The repository must contain the actual contribution,
+              not just an empty template.
+            </p>
+
+            <details class="word-fallback" style="border-color:var(--line)">
+              <summary style="color:var(--ink)">
+                Editors: import a GitHub submission with its history
+              </summary>
+              <p>
+                Use the commit recorded in the TIDA DataTracker,
+                never <code>main</code>. Create an
+                <strong>empty</strong> repository named
+                <code>wg&lt;n&gt;-&lt;acronym&gt;-&lt;name&gt;</code>
+                in the working group organisation (no README,
+                no template files), then run:
+              </p>
+              <p>
+                <code>git clone https://github.com/PROPOSER/REPO.git wg-import</code><br>
+                <code>cd wg-import</code><br>
+                <code>git checkout -b main FULL-SHA</code><br>
+                <code>git remote add wg https://github.com/fg-tida-wg&lt;n&gt;/wg&lt;n&gt;-&lt;acronym&gt;-&lt;name&gt;.git</code><br>
+                <code>git push wg main</code>
+              </p>
+              <p>
+                This keeps the proposer's history and authorship up to
+                the reviewed commit and leaves out any later changes.
+                Then set <strong>Settings → Pages → Source: GitHub
+                Actions</strong>, protect <code>main</code>, assign
+                maintainers and link the repository to the same
+                DataTracker record. For a ZIP submission, create the
+                repository from the template, unzip the package into
+                it and commit with the proposer as author.
+              </p>
+            </details>
+
+            <p>
+              Editors assign maintainers, check the build and configure
+              the approved publishing integration. The DataTracker links
+              the official repository to the
+              <strong>same contribution record</strong>, retaining
+              the original submission, its provenance and the
+              adoption decision.
+            </p>
+            <p>
+              Subsequent changes use pull requests in the official WG
+              repository. Successful main-branch builds update the
+              working copy; formal releases archive numbered revisions
+              with their source and assets. Builds and repository
+              creation do not themselves approve or publish the work item.
+            </p>
           </div>
         </li>
+
         <li class="step">
           <div class="num">&#9679;</div>
           <div class="end">
             <strong>It is now an existing work item.</strong>
-            From here, everyone contributes through <a href="#existing">the path for an existing work item</a>.
+            From here, everyone contributes through
+            <a href="#existing">the path for an existing work item</a>.
           </div>
         </li>
       </ol>
     </section>
-
   </div>
-  </section>
+</section>
 
-  <section class="sync" aria-labelledby="hs">
-    <h2 id="hs">GitHub and the TIDA DataTracker stay in sync</h2>
-    <p>After adoption, once the official WG repository and approved publishing integration are configured, GitHub and the TIDA DataTracker stay in step. A draft repository URL alone does not activate this workflow. Each row below describes the configured integration, in the direction of the arrow.</p>
-    <div class="scols" aria-hidden="true"><span>GitHub</span><span>TIDA DataTracker</span></div>
+<!-- SYNCHRONISATION -->
+<section class="sync" aria-labelledby="hs">
+  <h2 id="hs">GitHub and the TIDA DataTracker stay in sync</h2>
+  <p>
+    After adoption, once the official WG repository and approved
+    publishing integration are configured, GitHub and the TIDA
+    DataTracker stay in step. A draft repository URL alone does not
+    activate this workflow. Each row below describes the configured
+    integration, in the direction of the arrow.
+  </p>
 
-    <div class="srow">
-      <div class="sbox"><div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span></div><h3>Pull request merged into <code>main</code></h3></div>
-      <div class="schan"><span>sends the new build</span><span class="sarrow" aria-label="to the TIDA DataTracker">&rarr;</span></div>
-      <div class="sbox"><div class="tags"><span class="tag"><i class="dot tr"></i>TIDA DataTracker</span></div><h3>Working copy updated</h3><p>The PDF and manifest of the latest build replace the working copy. The merge is logged in the work item's history. The revision number stays the same.</p></div>
+  <div class="scols" aria-hidden="true">
+    <span>GitHub</span>
+    <span>TIDA DataTracker</span>
+  </div>
+
+  <div class="srow">
+    <div class="sbox">
+      <div class="tags">
+        <span class="tag"><i class="dot gh"></i>GitHub</span>
+      </div>
+      <h3>Pull request merged into <code>main</code></h3>
     </div>
-
-    <div class="srow">
-      <div class="sbox"><div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span></div><h3>Release tag <code>vX.Y</code> pushed</h3></div>
-      <div class="schan"><span>sends PDF, source archive, manifest</span><span class="sarrow" aria-label="to the TIDA DataTracker">&rarr;</span></div>
-      <div class="sbox"><div class="tags"><span class="tag"><i class="dot tr"></i>TIDA DataTracker</span></div><h3>Revision X.Y recorded</h3><p>A new numbered revision is stored. The TIDA DataTracker rejects a duplicate or out-of-order tag.</p></div>
+    <div class="schan">
+      <span>sends the new build</span>
+      <span class="sarrow"
+        aria-label="to the TIDA DataTracker">&rarr;</span>
     </div>
-
-    <div class="srow">
-      <div class="sbox"><div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span></div><h3>Repository shows the state</h3><p>Once the repository exists, a badge and label in it show the work item's lifecycle state.</p></div>
-      <div class="schan"><span>sends the new state</span><span class="sarrow" aria-label="to GitHub">&larr;</span></div>
-      <div class="sbox"><div class="tags"><span class="tag"><i class="dot tr"></i>TIDA DataTracker</span></div><h3>State changes from Under review on</h3><p>Under review or Published. Before Under review, a Submitted or Incubated work item is followed in the TIDA DataTracker, filtered by working group or in the incubation queue view.</p></div>
+    <div class="sbox">
+      <div class="tags">
+        <span class="tag"><i class="dot tr"></i>TIDA DataTracker</span>
+      </div>
+      <h3>Working copy updated</h3>
+      <p>
+        The PDF and manifest of the latest build replace the working
+        copy. The merge is logged in the work item's history.
+        The revision number stays the same.
+      </p>
     </div>
+  </div>
 
-    <div class="srow">
-      <div class="sbox"><div class="tags"><span class="tag"><i class="dot gh"></i>GitHub</span></div><h3>Repository created in the working group organisation</h3><p>From the work item template, named <code>wg&lt;n&gt;-&lt;acronym&gt;-&lt;name&gt;</code>. The TIDA DataTracker's repository link is updated.</p></div>
-      <div class="schan"><span>triggers creation</span><span class="sarrow" aria-label="to GitHub">&larr;</span></div>
-      <div class="sbox"><div class="tags"><span class="tag"><i class="dot tr"></i>TIDA DataTracker</span></div><h3>The work item is adopted</h3><p>By the working group it was allocated to, directly or after leaving the incubation queue.</p></div>
+  <div class="srow">
+    <div class="sbox">
+      <div class="tags">
+        <span class="tag"><i class="dot gh"></i>GitHub</span>
+      </div>
+      <h3>Release tag <code>vX.Y</code> pushed</h3>
     </div>
-  </section>
+    <div class="schan">
+      <span>sends PDF, source archive, manifest</span>
+      <span class="sarrow"
+        aria-label="to the TIDA DataTracker">&rarr;</span>
+    </div>
+    <div class="sbox">
+      <div class="tags">
+        <span class="tag"><i class="dot tr"></i>TIDA DataTracker</span>
+      </div>
+      <h3>Revision X.Y recorded</h3>
+      <p>
+        A new numbered revision is stored. The TIDA DataTracker rejects
+        a duplicate or out-of-order tag.
+      </p>
+    </div>
+  </div>
+
+  <div class="srow">
+    <div class="sbox">
+      <div class="tags">
+        <span class="tag"><i class="dot gh"></i>GitHub</span>
+      </div>
+      <h3>Repository shows the state</h3>
+      <p>
+        Once the repository exists, a badge and label in it show the
+        work item's lifecycle state.
+      </p>
+    </div>
+    <div class="schan">
+      <span>sends the new state</span>
+      <span class="sarrow" aria-label="to GitHub">&larr;</span>
+    </div>
+    <div class="sbox">
+      <div class="tags">
+        <span class="tag"><i class="dot tr"></i>TIDA DataTracker</span>
+      </div>
+      <h3>State changes from Under review on</h3>
+      <p>
+        Under review or Published. Before Under review, a Submitted or
+        Incubated work item is followed in the TIDA DataTracker, filtered
+        by working group or in the incubation queue view.
+      </p>
+    </div>
+  </div>
+
+  <div class="srow">
+    <div class="sbox">
+      <div class="tags">
+        <span class="tag"><i class="dot gh"></i>GitHub</span>
+      </div>
+      <h3>Repository created in the working group organisation</h3>
+      <p>
+        From the work item template, named
+        <code>wg&lt;n&gt;-&lt;acronym&gt;-&lt;name&gt;</code>.
+        The TIDA DataTracker's repository link is updated.
+      </p>
+    </div>
+    <div class="schan">
+      <span>triggers creation</span>
+      <span class="sarrow" aria-label="to GitHub">&larr;</span>
+    </div>
+    <div class="sbox">
+      <div class="tags">
+        <span class="tag"><i class="dot tr"></i>TIDA DataTracker</span>
+      </div>
+      <h3>The work item is adopted</h3>
+      <p>
+        By the working group it was allocated to, directly or after
+        leaving the incubation queue.
+      </p>
+    </div>
+  </div>
+</section>
+
 </div>
 </body>
 </html>
-
