@@ -44,7 +44,7 @@ The **[TIDA DataTracker](https://tida-datatracker.org/)** is the online hub of F
 - **Follow** each work item through its life: Submitted, Incubated, Under review, Published (or Rejected).
 - **Find** meeting information, registration, and the latest working copy and released revisions of every work item.
 
-👉 [Open the DataTracker](https://tida-datatracker.org/) · 🎬 [How to use the DataTracker (video)](https://github.com/FG-TIDA/.github/blob/main/TIDA_datatracker_tour_v1.mp4)
+👉 [Open the DataTracker](https://tida-datatracker.org/) · 🎬 [How to use the DataTracker (video)](https://tida-datatracker.org/training/1/)
 
 ## Get Involved
 
