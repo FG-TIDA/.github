@@ -72,6 +72,10 @@ Mature themes will graduate to become WGs.
 | WG0 | Use Cases and Terminology (UCT) | [Access WG0](https://github.com/fg-tida-wg0) |
 | WG1 | Continuous and Dynamic Remote Attestation for Agentic AI (CDRA) | [Access WG1](https://github.com/fg-tida-wg1) |
 | WG2 | Identity, Behaviour and Enforcement for AI Agents (IBEA) | [Access WG2](https://github.com/fg-tida-wg2) |
+| WG3 | Discovery | [Access WG3](https://github.com/fg-tida-wg-3) |
+| WG4 | Control Plane potentials | [Access WG4](https://github.com/fg-tida-wg4) |
+| WG5 | Governance / Cross-Border / Interoperable Credentials | [Access WG5](https://github.com/fg-tida-wg5) |
+| WG6 | ICAP | [Access WG6](https://github.com/fg-tida-wg6) |
 
 ## Leadership
 
