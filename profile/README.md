@@ -74,8 +74,9 @@ Mature themes will graduate to become WGs.
 | WG2 | Identity, Behaviour and Enforcement for AI Agents (IBEA) | [Access WG2](https://github.com/fg-tida-wg2) |
 | WG3 | Discovery | [Access WG3](https://github.com/fg-tida-wg-3) |
 | WG4 | Governance / Cross-Border / Interoperable Credentials | [Access WG4](https://github.com/fg-tida-wg4) |
-| WG5 | ICAP | [Access WG5](https://github.com/fg-tida-wg5) |
+| WG5 | Implementation Conditions and Adoption Pathways for Trusted Agentic AI (ICAP) | [Access WG5](https://github.com/fg-tida-wg5) |
 | WG6 | Regulated Domains / Athena | [Access WG6](https://github.com/fg-tida-wg6) |
+| WG7 | Protected Groups / Online Child protection | [Access WG6](https://github.com/fg-tida-wg7) |
 
 ## Leadership
 
