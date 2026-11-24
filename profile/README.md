@@ -69,7 +69,7 @@ Mature themes will graduate to become WGs.
 
 | Working Group | Name | Link |
 |:--------------|:-----|:-----|
-| WG0 | Use Cases and Terminology (UCT) | [Access WG0](https://github.com/fg-tida-wg0) |
+| WG0 | Use Cases, Taxonomy and Terminology (UCT) | [Access WG0](https://github.com/fg-tida-wg0) |
 | WG1 | Continuous and Dynamic Remote Attestation for Agentic AI (CDRA) | [Access WG1](https://github.com/fg-tida-wg1) |
 | WG2 | Identity, Behaviour and Enforcement for AI Agents (IBEA) | [Access WG2](https://github.com/fg-tida-wg2) |
 | WG3 | Discovery | [Access WG3](https://github.com/fg-tida-wg-3) |
@@ -77,6 +77,7 @@ Mature themes will graduate to become WGs.
 | WG5 | Implementation Conditions and Adoption Pathways for Trusted Agentic AI (ICAP) | [Access WG5](https://github.com/fg-tida-wg5) |
 | WG6 | Regulated Domains / Athena | [Access WG6](https://github.com/fg-tida-wg6) |
 | WG7 | Protected Groups / Online Child protection | [Access WG7](https://github.com/fg-tida-wg7) |
+| WG8 | Control Plane potentials | [Access WG8](https://github.com/fg-tida-wg8) |
 
 ## Leadership
 
