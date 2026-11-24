@@ -76,7 +76,7 @@ Mature themes will graduate to become WGs.
 | WG4 | Governance / Cross-Border / Interoperable Credentials | [Access WG4](https://github.com/fg-tida-wg4) |
 | WG5 | Implementation Conditions and Adoption Pathways for Trusted Agentic AI (ICAP) | [Access WG5](https://github.com/fg-tida-wg5) |
 | WG6 | Regulated Domains / Athena | [Access WG6](https://github.com/fg-tida-wg6) |
-| WG7 | Protected Groups / Online Child protection | [Access WG6](https://github.com/fg-tida-wg7) |
+| WG7 | Protected Groups / Online Child protection | [Access WG7](https://github.com/fg-tida-wg7) |
 
 ## Leadership
 
